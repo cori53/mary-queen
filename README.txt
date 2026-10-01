@@ -1,0 +1,1 @@
+MARY Queen: PWA mobile leggera. Apri index.html e aggiungila alla schermata Home. Dati locali e backup JSON.
