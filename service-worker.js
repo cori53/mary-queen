@@ -1,27 +1,8 @@
-const CACHE = 'mary-queen-v2';
-const ASSETS = [
-  './',
-  './index.html',
-  './manifest.json',
-  './icon-192.png',
-  './icon-512.png',
-  './icon-512-maskable.png'
-];
-self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)));
-  self.skipWaiting();
-});
-self.addEventListener('activate', event => {
-  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))));
-  self.clients.claim();
-});
-self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
-  event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
-      const copy = response.clone();
-      caches.open(CACHE).then(cache => cache.put(event.request, copy));
-      return response;
-    }).catch(() => caches.match('./index.html')))
-  );
+const CACHE='mary-queen-ultimate-v1';
+const ASSETS=["./", "./index.html", "./styles.css", "./app.js", "./manifest.json", "./mary-logo.png", "./icon-192.png", "./icon-512.png", "./icon-512-maskable.png", "./assets/promo/mary-queen-board.jpg", "./assets/screens/screen-01.jpg", "./assets/screens/screen-02.jpg", "./assets/screens/screen-03.jpg", "./assets/screens/screen-04.jpg", "./assets/screens/screen-05.jpg", "./assets/screens/screen-06.jpg", "./assets/screens/screen-07.jpg", "./assets/screens/screen-08.jpg", "./assets/screens/screen-09.jpg", "./assets/screens/screen-10.jpg", "./assets/screens/screen-11.jpg", "./assets/screens/screen-12.jpg", "./assets/screens/screen-13.jpg", "./assets/screens/screen-14.jpg", "./assets/screens/screen-15.jpg", "./assets/screens/screen-16.jpg", "./assets/screens/screen-17.jpg", "./assets/screens/screen-18.jpg", "./assets/screens/screen-19.jpg", "./assets/screens/screen-20.jpg", "./assets/screens/screen-21.jpg", "./assets/screens/screen-22.jpg", "./assets/screens/screen-23.jpg", "./assets/screens/screen-24.jpg", "./assets/screens/screen-25.jpg", "./assets/screens/screen-26.jpg", "./assets/screens/screen-27.jpg", "./assets/screens/screen-28.jpg", "./assets/screens/screen-29.jpg", "./assets/screens/screen-30.jpg", "./assets/screens/shopping.jpg"];
+self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)));self.skipWaiting()});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x)))));self.clients.claim()});
+self.addEventListener('fetch',e=>{
+ if(e.request.method!=='GET') return;
+ e.respondWith(fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))
 });

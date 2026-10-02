@@ -1,12 +1,49 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#7c3aed"><meta name="description" content="MARY Queen — wellness, salute, fitness, beauty, agenda e vita quotidiana."><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-192.png"><link rel="icon" type="image/png" href="icon-192.png"><title>MARY Queen</title><style>
-:root{--b:#faf7ff;--c:#fff;--t:#251a36;--m:#81748f;--p:#7c3aed;--k:#ec4899;--l:#eee6f7}body.dark{--b:#15111c;--c:#211a2b;--t:#faf5ff;--m:#b9adca;--l:#3b3048}*{box-sizing:border-box}body{margin:0;background:var(--b);color:var(--t);font:15px system-ui}.app{max-width:430px;margin:auto;padding-bottom:78px}header{padding:18px 16px 10px;display:flex;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px}.brand img{width:48px;height:48px;border-radius:15px;box-shadow:0 5px 16px rgba(76,29,149,.25)}.logo{font-size:21px;font-weight:900;line-height:1}.pink{color:var(--k)}main{padding:8px 14px}.page{display:none}.page.active{display:block}.hero{padding:20px;border-radius:24px;background:linear-gradient(135deg,#7c3aed,#ec4899);color:#fff;margin-bottom:12px}.hero h1{margin:0 0 5px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{background:var(--c);border:1px solid var(--l);border-radius:18px;padding:14px}.wide{grid-column:1/-1}.label,.small{font-size:12px;color:var(--m)}.value{font-size:24px;font-weight:900}.bar{height:8px;background:var(--l);border-radius:9px;overflow:hidden;margin-top:9px}.fill{height:100%;background:linear-gradient(90deg,var(--p),var(--k));width:0}.section{font-size:19px;font-weight:850;margin:10px 2px}button{border:0;border-radius:12px;padding:9px 12px;background:var(--p);color:#fff;font-weight:700}button.secondary{background:var(--l);color:var(--t)}input[type=text]{width:100%;padding:11px;border:1px solid var(--l);border-radius:12px;background:var(--b);color:var(--t)}input[type=range]{width:100%}.list{list-style:none;padding:0;margin:8px 0}.list li{padding:9px 0;border-bottom:1px solid var(--l)}.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.tile{background:var(--c);border:1px solid var(--l);border-radius:16px;padding:12px;text-align:center}.tile b{display:block;font-size:12px;margin-top:5px}nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:var(--c);border-top:1px solid var(--l);padding:7px 5px;z-index:5}nav button{background:none;color:var(--m);font-size:11px;padding:7px 2px}nav button.on{color:var(--p)}</style></head><body><div class="app"><header><div class="brand"><img src="mary-logo.png" alt="Logo MARY Queen"><div class="logo">MARY <span class="pink">QUEEN</span></div></div><button id="theme" class="secondary">☾</button></header><main>
-<section id="home" class="page active"><div class="hero"><h1>La tua giornata</h1><div id="date"></div></div><div class="grid"><div class="card"><div class="label">💧 ACQUA</div><div class="value"><span id="wv">0</span>/8</div><div class="bar"><div id="wf" class="fill"></div></div></div><div class="card"><div class="label">😴 SONNO</div><div class="value">7h 32m</div><div class="small">Obiettivo 8h</div></div><div class="card"><div class="label">👟 PASSI</div><div class="value">6.240</div><div class="small">Obiettivo 8.000</div></div><div class="card"><div class="label">✨ GLOW</div><div class="value">82%</div><div class="small">Routine</div></div><div class="card wide"><b>💜 Missioni Queen</b><ul class="list"><li>☐ 10 min movimento</li><li>☐ 2 bicchieri d'acqua</li><li>☐ Routine beauty</li></ul></div></div></section>
-<section id="salute" class="page"><div class="section">❤️ Salute Donna</div><div class="grid"><div class="card wide"><div class="label">🌸 CICLO</div><div class="value">Giorno 14</div></div><div class="card"><b>💊 Farmaci</b><div class="value">2</div></div><div class="card"><b>🩺 Visite</b><div class="value">1</div></div><div class="card wide"><b>Nota salute</b><input id="note" type="text" placeholder="Scrivi una nota…"></div></div></section>
-<section id="well" class="page"><div class="section">✨ Wellness Queen</div><div class="card"><b>💧 Idratazione</b><input id="water" type="range" min="0" max="8" value="0"></div><div class="tiles" style="margin-top:10px"><div class="tile">🏋️<b>Fitness</b></div><div class="tile">💄<b>Beauty</b></div><div class="tile">🍳<b>Kitchen</b></div><div class="tile">😴<b>Relax</b></div><div class="tile">🧠<b>Mental</b></div><div class="tile">🤖<b>AI Coach</b></div></div></section>
-<section id="agenda" class="page"><div class="section">📅 Calendario</div><div class="card"><ul class="list"><li>09:00 • Appuntamento</li><li>13:00 • Pranzo</li><li>18:30 • Fitness</li></ul></div><div class="section">🏠 Casa & Famiglia</div><div class="card"><input id="task" type="text" placeholder="Nuova attività"><button onclick="addTask()">Aggiungi</button><ul id="tasks" class="list"></ul></div></section>
-<section id="profile" class="page"><div class="section">⚙️ Profilo</div><div class="grid"><div class="card wide"><b>💾 Backup</b><p class="small">Esporta i dati locali.</p><button onclick="backup()">Esporta JSON</button></div><div class="card"><b>🌍 Lingua</b><p class="small">Italiano</p></div><div class="card"><b>📊 Statistiche</b><p class="small">In sviluppo</p></div></div></section></main><nav><button class="on" data-p="home">⌂<br>Home</button><button data-p="salute">♡<br>Salute</button><button data-p="well">✦<br>Wellness</button><button data-p="agenda">□<br>Agenda</button><button data-p="profile">⚙<br>Profilo</button></nav></div>
-<script>const K='maryQ',D=JSON.parse(localStorage.getItem(K)||'{"water":0,"dark":false,"note":"","tasks":[]}'),$=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);function save(){localStorage.setItem(K,JSON.stringify(D))}function render(){$('#water').value=D.water;$('#wv').textContent=D.water;$('#wf').style.width=D.water/8*100+'%';$('#note').value=D.note;document.body.classList.toggle('dark',D.dark);$('#theme').textContent=D.dark?'☀':'☾';$('#tasks').innerHTML=D.tasks.map((x,i)=>'<li>'+x+' <button onclick="delTask('+i+')" style="float:right;padding:5px 8px">×</button></li>').join('')}$$('nav button').forEach(b=>b.onclick=()=>{$$('nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');$$('.page').forEach(p=>p.classList.remove('active'));$('#'+b.dataset.p).classList.add('active')});$('#water').oninput=e=>{D.water=+e.target.value;save();render()};$('#theme').onclick=()=>{D.dark=!D.dark;save();render()};$('#note').oninput=e=>{D.note=e.target.value;save()};function addTask(){let x=$('#task').value.trim();if(x){D.tasks.push(x);$('#task').value='';save();render()}}function delTask(i){D.tasks.splice(i,1);save();render()}function backup(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(D,null,2)],{type:'application/json'}));a.download='MARY_Queen_backup.json';a.click()}$('#date').textContent=new Date().toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'});render();
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
-}
-</script></body></html>
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#6f249c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="styles.css">
+<title>MARY – Queen Edition</title>
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="brand" id="brandHome">
+      <img src="mary-logo.png" alt="MARY Queen logo">
+      <div>
+        <div class="brand-title">MARY <span>Queen Edition</span></div>
+        <div class="brand-sub">La tua vita, la tua forza.</div>
+      </div>
+    </div>
+    <button class="round-btn" id="themeBtn" aria-label="Tema">◐</button>
+  </header>
+
+  <main id="view"></main>
+
+  <nav class="bottom-nav">
+    <button class="nav active" data-view="home"><b>⌂</b><span data-t="home">Home</span></button>
+    <button class="nav" data-view="areas"><b>♛</b><span data-t="areas">Aree</span></button>
+    <button class="nav" data-view="nearby"><b>⌖</b><span data-t="nearby">Vicino</span></button>
+    <button class="nav" data-view="agenda"><b>▣</b><span data-t="agenda">Agenda</span></button>
+    <button class="nav" data-view="profile"><b>⚙</b><span data-t="profile">Profilo</span></button>
+  </nav>
+</div>
+
+<div class="sheet hidden" id="sheet">
+  <div class="sheet-card">
+    <div class="sheet-handle"></div>
+    <button class="sheet-close" id="sheetClose">×</button>
+    <div id="sheetContent"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast">Salvato</div>
+<script src="app.js"></script>
+</body>
+</html>

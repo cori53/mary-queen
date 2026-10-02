@@ -1,19 +1,13 @@
 {
-  "id": "./",
-  "name": "MARY Queen",
+  "name": "MARY – Queen Edition",
   "short_name": "MARY",
-  "description": "Wellness, salute, fitness, beauty, agenda e vita quotidiana.",
-  "lang": "it",
+  "description": "Salute donna, servizi vicini, lavoro e CV, MARY Mamma, fitness, nutrizione, beauty, casa, shopping, Queen Club e organizzazione personale.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "display_override": [
-    "standalone",
-    "minimal-ui"
-  ],
+  "background_color": "#12071d",
+  "theme_color": "#6f249c",
   "orientation": "portrait-primary",
-  "theme_color": "#7c3aed",
-  "background_color": "#faf7ff",
   "icons": [
     {
       "src": "icon-192.png",
