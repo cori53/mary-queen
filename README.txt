@@ -1,1 +1,2 @@
-MARY Queen: PWA mobile leggera. Apri index.html e aggiungila alla schermata Home. Dati locali e backup JSON.
+MARY Queen PWA installabile
+Carica tutti i file di questa cartella nella radice del repository GitHub mary-queen, sostituendo index.html e manifest.json.
