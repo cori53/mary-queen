@@ -4,14 +4,58 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#6f249c">
-<meta name="application-name" content="MARY Queen">
-<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
-<link rel="stylesheet" href="styles.css">
+<style>
+
+:root{
+ --bg:#f8f3fb;--card:#ffffff;--ink:#24142e;--muted:#806e88;--line:#eadff0;
+ --p:#6d249b;--p2:#a743bd;--pink:#ef62b6;--gold:#e2b44d;--good:#2b9b72;
+ --shadow:0 10px 28px rgba(83,34,111,.12);--soft:rgba(109,36,155,.10)
+}
+body.dark{--bg:#110918;--card:#1d1225;--ink:#faf4ff;--muted:#c7b5ce;--line:#35223f;--soft:rgba(183,106,215,.15);--shadow:0 14px 32px rgba(0,0,0,.28)}
+*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+#app{max-width:430px;margin:auto;min-height:100vh;padding-bottom:86px}
+.topbar{position:sticky;top:0;z-index:20;padding:12px 15px;background:linear-gradient(135deg,#43135f,#862ab1 62%,#b944a4);color:#fff;display:flex;align-items:center;justify-content:space-between;box-shadow:0 8px 22px rgba(50,15,72,.25)}
+.brand{display:flex;align-items:center;gap:10px}.brand img{width:48px;height:48px;border-radius:14px;object-fit:cover;border:1px solid rgba(255,255,255,.35)}
+.brand-title{font-weight:900;letter-spacing:.04em;font-size:19px}.brand-title span{display:block;font-size:10px;font-weight:700;color:#f7d992;letter-spacing:.12em}.brand-sub{font-size:10px;opacity:.9;margin-top:2px}
+.round-btn{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.13);color:#fff;width:39px;height:39px;border-radius:13px;font-size:18px}
+main{padding:14px}.hero{border-radius:26px;overflow:hidden;position:relative;background:linear-gradient(135deg,#481360,#8c2bb1 60%,#d74eac);color:#fff;min-height:190px;box-shadow:var(--shadow)}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.24}.hero-content{position:relative;padding:20px}.hero-logo{width:58px;height:58px;border-radius:18px;border:1px solid rgba(255,255,255,.38)}
+.hero h1{font-size:26px;margin:12px 0 4px}.hero p{font-size:13px;line-height:1.45;margin:0;max-width:270px}.quote{margin-top:13px;padding:10px 12px;background:rgba(255,255,255,.14);border-radius:14px;font-size:12px}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:18px 2px 10px}.section-head h2{font-size:18px;margin:0}.section-head button{border:0;background:none;color:var(--p);font-weight:800}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px}.metric,.card,.module-card,.quick,.list-item{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+.metric{border-radius:19px;padding:13px}.metric .label{font-size:11px;color:var(--muted)}.metric .value{font-size:26px;font-weight:900;margin-top:4px}.meter{height:7px;background:var(--line);border-radius:999px;margin-top:9px;overflow:hidden}.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--p),var(--pink));border-radius:inherit}
+.quick-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.quick{border-radius:16px;padding:10px 5px;text-align:center;border:1px solid var(--line)}.quick b{display:block;font-size:19px}.quick span{font-size:9px;color:var(--muted)}
+.module-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.module-card{overflow:hidden;border-radius:20px;position:relative}.module-card img{width:100%;height:142px;object-fit:cover;object-position:top;display:block}.module-card .mc-body{padding:10px}.module-card .mc-title{font-weight:900;font-size:13px}.module-card .mc-sub{font-size:10px;color:var(--muted);margin-top:3px;line-height:1.3}.tag{display:inline-block;margin-top:6px;padding:4px 7px;border-radius:999px;background:var(--soft);color:var(--p);font-size:9px;font-weight:800}
+.search{display:flex;gap:8px}.search input,.search select,input,select,textarea{width:100%;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:13px;padding:11px;outline:none}textarea{min-height:92px;resize:vertical}
+.filters{display:flex;gap:7px;overflow:auto;padding:4px 0 10px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.chip{border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:7px 10px;white-space:nowrap;font-size:11px;font-weight:800}.chip.active{background:var(--p);color:#fff;border-color:var(--p)}
+.card{border-radius:21px;padding:14px;margin-bottom:12px}.card h3{margin:0 0 8px;font-size:15px}.card p{color:var(--muted);font-size:12px;line-height:1.45;margin:4px 0}
+.btn{border:0;border-radius:13px;padding:10px 13px;font-weight:800;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff}.btn.alt{background:var(--card);border:1px solid var(--line);color:var(--p)}.btn.gold{background:linear-gradient(135deg,#bd8728,#e5bd64);color:#2c1b00}.btn.danger{background:#a52d53}.btn.full{width:100%}
+.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}.row .auto{flex:0 0 auto}.stack{display:grid;gap:8px}.label{font-size:11px;color:var(--muted);margin:6px 1px 4px;display:block}
+.list{display:grid;gap:8px;margin-top:9px}.list-item{border-radius:14px;padding:10px}.list-item strong{display:block;font-size:13px}.list-item small{color:var(--muted);font-size:10px}.list-item .actions{display:flex;gap:6px;margin-top:7px}.mini{padding:6px 8px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--p);font-weight:800;font-size:10px}
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:22;width:min(430px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:var(--card);border-top:1px solid var(--line);padding:7px 5px calc(7px + env(safe-area-inset-bottom))}
+.nav{background:none;border:0;color:var(--muted);font-size:9px;font-weight:700}.nav b{display:block;font-size:19px;line-height:22px}.nav.active{color:var(--p)}
+.sheet{position:fixed;z-index:50;inset:0;background:rgba(18,7,29,.62);display:flex;align-items:flex-end;justify-content:center}.sheet.hidden{display:none}.sheet-card{position:relative;width:min(430px,100%);max-height:92vh;overflow:auto;background:var(--bg);border-radius:28px 28px 0 0;padding:13px 14px 30px;box-shadow:0 -18px 50px rgba(0,0,0,.28)}.sheet-handle{width:52px;height:5px;background:#c9b8d1;border-radius:999px;margin:2px auto 10px}.sheet-close{position:absolute;right:14px;top:12px;border:0;background:var(--card);color:var(--ink);width:34px;height:34px;border-radius:12px;font-size:22px}
+.module-hero{display:grid;grid-template-columns:116px 1fr;gap:13px;align-items:center;margin-bottom:13px}.module-hero img{width:116px;height:175px;object-fit:cover;object-position:top;border-radius:20px;border:1px solid var(--line);box-shadow:var(--shadow)}.module-hero h2{font-size:22px;margin:0 0 5px}.module-hero p{font-size:11px;color:var(--muted);line-height:1.45;margin:0}.module-hero .icon{font-size:28px}
+.mapbox{height:245px;border-radius:22px;position:relative;overflow:hidden;background:
+linear-gradient(18deg,transparent 47%,rgba(255,255,255,.8) 48%,rgba(255,255,255,.8) 53%,transparent 54%),
+linear-gradient(103deg,transparent 42%,rgba(255,255,255,.75) 43%,rgba(255,255,255,.75) 48%,transparent 49%),
+linear-gradient(135deg,#d8eddc,#efe7cf)}
+.mapbox:before,.mapbox:after{content:"";position:absolute;background:#bad2ee}.mapbox:before{left:42%;top:-10%;width:22px;height:120%;transform:rotate(24deg)}.mapbox:after{left:-10%;top:58%;width:120%;height:18px;transform:rotate(-7deg)}
+.pin{position:absolute;z-index:2;width:33px;height:33px;border-radius:50% 50% 50% 0;background:var(--p);transform:rotate(-45deg);display:grid;place-items:center;box-shadow:0 5px 14px rgba(63,20,89,.25)}.pin span{transform:rotate(45deg);font-size:15px}.pin.pink{background:#e14da5}.pin.gold{background:#d39b30}
+.toast{position:fixed;z-index:80;left:50%;bottom:92px;transform:translateX(-50%) translateY(20px);opacity:0;background:#2a1734;color:#fff;padding:10px 14px;border-radius:999px;font-size:11px;transition:.2s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.promo{width:100%;border-radius:20px;border:1px solid var(--line);box-shadow:var(--shadow)}.empty{padding:18px;text-align:center;color:var(--muted);font-size:12px}.kpi{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:9px 0}.kpi:last-child{border:0}.kpi b{font-size:18px}
+.quote-big{font-family:Georgia,serif;font-style:italic;font-size:20px;line-height:1.45;padding:18px;background:linear-gradient(135deg,#54206f,#9231ad);color:white;border-radius:20px}
+.badges{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.badge{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:12px 7px;text-align:center}.badge b{display:block;font-size:21px}.badge small{font-size:9px;color:var(--muted)}
+@media(max-width:350px){.module-grid,.grid2{grid-template-columns:1fr}.module-card img{height:170px}.quick-row{grid-template-columns:repeat(2,1fr)}}
+
+</style>
 <title>MARY – Queen Edition</title>
+<meta name="mary-build" content="one-file-fix-2026-10-03">
 </head>
 <body>
 <div id="app">
@@ -46,12 +90,342 @@
 </div>
 
 <div id="toast" class="toast">Salvato</div>
-<script src="app.js"></script>
+<script>
+
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const KEY='MARY_QUEEN_ULTIMATE_V1';
+
+const MODULES=[
+{id:'welcome',n:1,title:'Benvenuto MARY',group:'Queen',icon:'👑',img:1,desc:'Splash, onboarding e identità MARY.'},
+{id:'login',n:2,title:'Login & Profilo',group:'Queen',icon:'👤',img:2,desc:'Profilo personale locale e preferenze.'},
+{id:'dashboard',n:3,title:'Home Queen',group:'Vita',icon:'🏠',img:3,desc:'La tua giornata, obiettivi e progressi.'},
+{id:'health',n:4,title:'Salute Donna 360°',group:'Salute',icon:'🌸',img:4,desc:'Ciclo, sintomi, controlli e benessere femminile.'},
+{id:'pregnancy',n:5,title:'Gravidanza',group:'Mamma',icon:'🤰',img:5,desc:'Settimane, note, visite e preparazione.'},
+{id:'menopause',n:6,title:'Premenopausa & Menopausa',group:'Salute',icon:'🌷',img:6,desc:'Sintomi, diario e benessere quotidiano.'},
+{id:'mental',n:7,title:'Benessere Mentale',group:'Salute',icon:'🧠',img:7,desc:'Mood, stress, respiro e self-care.'},
+{id:'mentalDiary',n:8,title:'Diario dell’Umore',group:'Salute',icon:'💜',img:8,desc:'Note emotive e diario personale.'},
+{id:'nutrition',n:9,title:'Nutrizione Queen',group:'Nutrizione',icon:'🥗',img:9,desc:'Piano pasti, peso, obiettivi e nutrizionista.'},
+{id:'recipes',n:10,title:'Ricette Healthy',group:'Nutrizione',icon:'🍲',img:10,desc:'Ricettario personale e lista spesa.'},
+{id:'fitness',n:11,title:'Allenamento Queen',group:'Fitness',icon:'🏋️',img:11,desc:'Programmi, minuti e progressi.'},
+{id:'workout',n:12,title:'Workout',group:'Fitness',icon:'🤸',img:12,desc:'Schede rapide e sessioni guidate.'},
+{id:'beauty',n:13,title:'Beauty Queen',group:'Beauty',icon:'💄',img:13,desc:'Skincare, make-up, unghie e routine.'},
+{id:'estetista',n:14,title:'Estetista',group:'Beauty',icon:'✨',img:14,desc:'Appuntamenti e professionisti beauty.'},
+{id:'jobs',n:15,title:'Lavoro',group:'Lavoro',icon:'💼',img:15,desc:'Offerte salvate, candidature e obiettivi.'},
+{id:'cv',n:16,title:'Curriculum Builder',group:'Lavoro',icon:'📄',img:16,desc:'Crea e salva il tuo CV.'},
+{id:'nearby',n:17,title:'Vicino a Te',group:'Servizi',icon:'📍',img:17,desc:'Cerca servizi e professionisti per categoria.'},
+{id:'map',n:18,title:'Mappa Servizi',group:'Servizi',icon:'🗺️',img:18,desc:'Mappa visuale e ricerca esterna.'},
+{id:'calendar',n:19,title:'Calendario Queen',group:'Vita',icon:'📅',img:19,desc:'Appuntamenti, visite, lavoro e famiglia.'},
+{id:'club',n:20,title:'Queen Club',group:'Queen',icon:'⭐',img:20,desc:'XP, badge e sfide quotidiane.'},
+{id:'profile',n:21,title:'Profilo',group:'Queen',icon:'👤',img:21,desc:'Dati, obiettivi e preferenze.'},
+{id:'settings',n:22,title:'Impostazioni',group:'Queen',icon:'⚙️',img:22,desc:'Tema, backup, privacy e dati locali.'},
+{id:'notifications',n:23,title:'Notifiche Smart',group:'Vita',icon:'🔔',img:23,desc:'Permessi e promemoria del browser.'},
+{id:'motivation',n:24,title:'Motivazione 365',group:'Queen',icon:'❤️',img:24,desc:'Una frase e una sfida per ogni giorno.'},
+{id:'gratitude',n:25,title:'Diario Gratitudine',group:'Salute',icon:'🙏',img:25,desc:'Tre cose belle ogni giorno.'},
+{id:'sos',n:26,title:'SOS Donna',group:'Salute',icon:'🛡️',img:26,desc:'Contatti rapidi e numeri utili.'},
+{id:'widget',n:27,title:'Gadget & Widget',group:'Vita',icon:'📊',img:27,desc:'Riepilogo rapido acqua, sonno, passi e umore.'},
+{id:'magazine',n:28,title:'Notizie & Magazine',group:'Queen',icon:'📰',img:28,desc:'Contenuti wellness e organizzazione.'},
+{id:'language',n:29,title:'Lingua',group:'Queen',icon:'🌍',img:29,desc:'Italiano, Română, English.'},
+{id:'onboarding',n:30,title:'Onboarding finale',group:'Queen',icon:'💎',img:30,desc:'La tua configurazione MARY.'},
+{id:'shopping',n:31,title:'Shopping Donna',group:'Beauty',icon:'🛍️',img:'shopping',desc:'Moda, beauty, cura del corpo e idee regalo.'},
+{id:'hair',n:32,title:'Capelli & Parrucchiere',group:'Beauty',icon:'💇‍♀️',img:13,desc:'Trattamenti, appuntamenti e acconciature.'},
+{id:'babysitter',n:33,title:'Babysitter',group:'Servizi',icon:'🧸',img:17,desc:'Contatti e note per babysitter.'},
+{id:'cleaning',n:34,title:'Pulizie & Casa',group:'Servizi',icon:'🧹',img:17,desc:'Pulizie, colf, stiro e attività domestiche.'},
+{id:'pediatrician',n:35,title:'Pediatra & Baby',group:'Mamma',icon:'👶',img:5,desc:'Crescita baby, pediatra e controlli.'},
+{id:'gynecologist',n:36,title:'Ginecologo',group:'Salute',icon:'🩺',img:4,desc:'Specialista, visite, esami e domande.'},
+{id:'nutritionist',n:37,title:'Nutrizionista',group:'Nutrizione',icon:'🍏',img:9,desc:'Professionista, piano e obiettivi.'},
+{id:'wallet',n:38,title:'Wallet Premium',group:'Vita',icon:'💰',img:27,desc:'Entrate, spese e saldo personale.'},
+{id:'meds',n:39,title:'Farmaci & Visite PRO',group:'Salute',icon:'💊',img:4,desc:'Farmaci, terapie e visite.'},
+{id:'family',n:40,title:'Casa & Famiglia',group:'Vita',icon:'🏡',img:3,desc:'Compiti, famiglia e organizzazione domestica.'}
+];
+
+const DEFAULT={
+ version:1,
+ profile:{name:'',email:'',phone:'',city:'',language:'it'},
+ settings:{dark:false},
+ health:{cycleDate:'',cycleLen:28,temp:'',symptoms:'',gynName:'',gynPhone:'',gynNotes:'',pregnancyStart:'',dueDate:'',meno:'',stress:5,mood:'😊',weight:'',weightGoal:'',nutritionist:'',nutritionNotes:'',babyName:'',babyBirth:'',babyWeight:'',babyHeight:'',pediatrician:''},
+ today:{water:0,steps:0,sleep:7.5,mood:'😊'},
+ logs:{events:[],notes:{},meals:[],recipes:[],workouts:[],beauty:[],appointments:[],jobs:[],shopping:[],services:[],money:[],gratitude:[],diary:[],meds:[],visits:[],homeTasks:[],baby:[]},
+ cv:{name:'',email:'',phone:'',profile:'',experience:'',education:'',skills:'',languages:''},
+ sos:{contact:'',phone:''},
+ xp:0
+};
+function clone(x){return JSON.parse(JSON.stringify(x))}
+function deepMerge(a,b){
+  if(!b||typeof b!=='object') return a;
+  for(const k of Object.keys(b)){
+    if(b[k] && typeof b[k]==='object' && !Array.isArray(b[k]) && a[k] && typeof a[k]==='object') deepMerge(a[k],b[k]);
+    else a[k]=b[k];
+  }
+  return a;
+}
+let S=(()=>{try{return deepMerge(clone(DEFAULT),JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){return clone(DEFAULT)}})();
+let currentView='home', activeGroup='Tutte';
+
+const I18N={
+it:{home:'Home',areas:'Aree',nearby:'Vicino',agenda:'Agenda',profile:'Profilo',hello:'Ciao',today:'La tua giornata',areasTitle:'Le aree di MARY',all:'Tutte'},
+ro:{home:'Acasă',areas:'Secțiuni',nearby:'Aproape',agenda:'Agendă',profile:'Profil',hello:'Bună',today:'Ziua ta',areasTitle:'Secțiunile MARY',all:'Toate'},
+en:{home:'Home',areas:'Areas',nearby:'Nearby',agenda:'Agenda',profile:'Profile',hello:'Hello',today:'Your day',areasTitle:'MARY areas',all:'All'}
+};
+
+function save(msg='Salvato'){localStorage.setItem(KEY,JSON.stringify(S));render();toast(msg)}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),1300)}
+function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function euro(v){return new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR'}).format(Number(v)||0)}
+function id(){return Date.now()+Math.floor(Math.random()*999)}
+function todayISO(){return new Date().toISOString().slice(0,10)}
+function imgSrc(m){return m.img==='shopping'?'shopping.jpg':`screen-${String(m.img).padStart(2,'0')}.jpg`}
+function addXP(n=5){S.xp+=n}
+function del(list,uid){S.logs[list]=S.logs[list].filter(x=>x.id!==uid);save()}
+function setField(path,value){
+  const parts=path.split('.'); let o=S; for(let i=0;i<parts.length-1;i++)o=o[parts[i]]; o[parts.at(-1)]=value; localStorage.setItem(KEY,JSON.stringify(S));
+}
+
+function dailyIndex(){const start=new Date(new Date().getFullYear(),0,0), now=new Date();return Math.floor((now-start)/86400000)}
+const QSTART=['Oggi scegli te stessa','La tua forza cresce quando','Ogni piccolo passo conta perché','Non devi essere perfetta:','La costanza è la tua corona:','Proteggi la tua energia:','Ricorda quanto vali:','Il tuo tempo è prezioso:','La calma è una forma di forza:','La tua voce conta:','Oggi puoi ricominciare:','La gentilezza verso te stessa','Un passo alla volta','La tua salute merita spazio','Le tue scelte di oggi','La tua storia continua quando','La disciplina dolce','La tua serenità cresce quando','Essere Queen significa'];
+const QEND=['fai una cosa concreta per il tuo benessere.','ti concedi di procedere con i tuoi tempi.','scegli una priorità e la porti a termine.','puoi essere semplicemente autentica.','torna alle abitudini che ti fanno bene.','di’ no a ciò che ti svuota.','non confrontarti con il percorso degli altri.','usalo per ciò che conta davvero.','crea cinque minuti senza rumore.','scrivi ciò di cui hai bisogno.','fai oggi ciò che ieri sembrava difficile.','è parte del tuo benessere.','costruisci la vita che vuoi.','ascolta il tuo corpo.','preparano la donna che sarai domani.','non smetti di scegliere te stessa.','vale più della fretta.','lasci andare ciò che non controlli.','trattarti con rispetto ogni giorno.'];
+function quote(){const i=dailyIndex();return QSTART[i%QSTART.length]+' '+QEND[(i*7)%QEND.length]}
+const CHALLENGES=['Bevi 2 bicchieri d’acqua in più','Cammina 15 minuti','Scrivi 3 cose per cui sei grata','Sistema una piccola zona di casa','Prepara un pasto semplice e bilanciato','Fai 10 minuti di stretching','Invia un messaggio a una persona cara','Dedica 15 minuti al tuo CV','Fai la skincare con calma','Vai a letto 20 minuti prima','Metti da parte una piccola somma','Scrivi una cosa che vuoi lasciare andare','Programma una visita che rimandi','Leggi 10 pagine','Fai una pausa senza telefono','Prepara la lista della spesa','Fai un complimento a te stessa','Completa una missione rimasta aperta','Respira lentamente per 3 minuti','Organizza domani prima di dormire'];
+function challenge(){return CHALLENGES[dailyIndex()%CHALLENGES.length]}
+
+function render(){
+  document.body.classList.toggle('dark',S.settings.dark);
+  $$('.nav').forEach(n=>n.classList.toggle('active',n.dataset.view===currentView));
+  const t=I18N[S.profile.language]||I18N.it;
+  $$('[data-t]').forEach(e=>{if(t[e.dataset.t])e.textContent=t[e.dataset.t]});
+  if(currentView==='home') renderHome();
+  if(currentView==='areas') renderAreas();
+  if(currentView==='nearby') renderNearby();
+  if(currentView==='agenda') renderAgenda();
+  if(currentView==='profile') renderProfile();
+}
+function goto(v){currentView=v;render();scrollTo({top:0,behavior:'smooth'})}
+
+function renderHome(){
+ const t=I18N[S.profile.language]||I18N.it;
+ const name=S.profile.name?`, ${esc(S.profile.name)}`:'';
+ const done=S.logs.homeTasks.filter(x=>x.done).length;
+ const total=S.logs.homeTasks.length||1;
+ $('#view').innerHTML=`
+ <section class="hero">
+   <img class="hero-bg" src="mary-queen-board.jpg" alt="">
+   <div class="hero-content">
+    <img class="hero-logo" src="mary-logo.png" alt="MARY">
+    <h1>${t.hello}${name} 👑</h1>
+    <p>MARY – Queen Edition. Salute, bellezza, lavoro, maternità, servizi, casa e vita quotidiana in un’unica app.</p>
+    <div class="quote">“${esc(quote())}”</div>
+   </div>
+ </section>
+ <div class="section-head"><h2>${t.today}</h2><button onclick="openModule('widget')">Dettagli</button></div>
+ <div class="grid2">
+   <div class="metric"><div class="label">💧 Acqua</div><div class="value">${S.today.water}/8</div><div class="meter"><i style="width:${Math.min(100,S.today.water/8*100)}%"></i></div><div class="row" style="margin-top:8px"><button class="mini" onclick="water(-1)">−</button><button class="mini" onclick="water(1)">＋</button></div></div>
+   <div class="metric"><div class="label">😴 Sonno</div><div class="value">${S.today.sleep}h</div><div class="meter"><i style="width:${Math.min(100,S.today.sleep/8*100)}%"></i></div></div>
+   <div class="metric"><div class="label">🚶 Passi</div><div class="value">${S.today.steps.toLocaleString('it-IT')}</div><div class="meter"><i style="width:${Math.min(100,S.today.steps/8000*100)}%"></i></div></div>
+   <div class="metric"><div class="label">⭐ Queen XP</div><div class="value">${S.xp}</div><div class="meter"><i style="width:${S.xp%100}%"></i></div></div>
+ </div>
+ <div class="section-head"><h2>Accesso rapido</h2><button onclick="goto('areas')">Tutte</button></div>
+ <div class="quick-row">
+   <button class="quick" onclick="openModule('health')"><b>🌸</b><span>Salute</span></button>
+   <button class="quick" onclick="openModule('nearby')"><b>📍</b><span>Vicino a te</span></button>
+   <button class="quick" onclick="openModule('jobs')"><b>💼</b><span>Lavoro</span></button>
+   <button class="quick" onclick="openModule('pregnancy')"><b>🤰</b><span>MARY Mamma</span></button>
+   <button class="quick" onclick="openModule('fitness')"><b>🏋️</b><span>Fitness</span></button>
+   <button class="quick" onclick="openModule('nutrition')"><b>🥗</b><span>Nutrizione</span></button>
+   <button class="quick" onclick="openModule('beauty')"><b>💄</b><span>Beauty</span></button>
+   <button class="quick" onclick="openModule('family')"><b>🏡</b><span>Casa</span></button>
+ </div>
+ <div class="section-head"><h2>Sfida Queen</h2><button onclick="openModule('club')">Queen Club</button></div>
+ <div class="card">
+   <h3>💎 ${esc(challenge())}</h3><p>Completa la sfida di oggi e premi il pulsante per guadagnare XP.</p>
+   <button class="btn gold" onclick="completeChallenge()">Completata +10 XP</button>
+ </div>
+ <div class="section-head"><h2>In evidenza</h2><button onclick="goto('areas')">Esplora</button></div>
+ <div class="module-grid">${['health','nearby','cv','pregnancy','beauty','shopping'].map(id=>moduleCard(MODULES.find(m=>m.id===id))).join('')}</div>
+ `;
+}
+function moduleCard(m){return `<button class="module-card" onclick="openModule('${m.id}')"><img src="${imgSrc(m)}" alt="${esc(m.title)}"><div class="mc-body"><div class="mc-title">${m.icon} ${esc(m.title)}</div><div class="mc-sub">${esc(m.desc)}</div><span class="tag">${esc(m.group)}</span></div></button>`}
+
+function renderAreas(){
+ const groups=['Tutte',...new Set(MODULES.map(m=>m.group))];
+ const mods=activeGroup==='Tutte'?MODULES:MODULES.filter(m=>m.group===activeGroup);
+ $('#view').innerHTML=`
+ <div class="section-head"><h2>${(I18N[S.profile.language]||I18N.it).areasTitle}</h2><span class="tag">30 principali + extra</span></div>
+ <div class="search"><input id="areaSearch" placeholder="Cerca: ginecologo, babysitter, CV..." oninput="filterAreas(this.value)"></div>
+ <div class="filters">${groups.map(g=>`<button class="chip ${g===activeGroup?'active':''}" onclick="setGroup('${g.replace(/'/g,"\'")}')">${esc(g)}</button>`).join('')}</div>
+ <div id="areaGrid" class="module-grid">${mods.map(moduleCard).join('')}</div>`;
+}
+function setGroup(g){activeGroup=g;renderAreas()}
+function filterAreas(q){
+ q=q.toLowerCase().trim();
+ const mods=(activeGroup==='Tutte'?MODULES:MODULES.filter(m=>m.group===activeGroup)).filter(m=>(m.title+' '+m.desc+' '+m.group).toLowerCase().includes(q));
+ $('#areaGrid').innerHTML=mods.map(moduleCard).join('')||'<div class="empty">Nessuna area trovata.</div>';
+}
+
+function renderNearby(){
+ const cats=['Estetista','Parrucchiere','Palestra','Nutrizionista','Ginecologo','Psicologo','Pediatra','Babysitter','Pulizie casa'];
+ $('#view').innerHTML=`
+ <div class="section-head"><h2>📍 Vicino a Te</h2><span class="tag">Servizi</span></div>
+ <div class="card"><h3>Cerca un servizio</h3><div class="row"><select id="nearCat">${cats.map(c=>`<option>${c}</option>`).join('')}</select><input id="nearCity" value="${esc(S.profile.city)}" placeholder="Città"></div><button class="btn full" style="margin-top:8px" onclick="openMapsSearch()">Apri ricerca sulla mappa</button></div>
+ <div class="mapbox">
+  <div class="pin" style="left:18%;top:25%"><span>💄</span></div><div class="pin pink" style="left:62%;top:18%"><span>🌸</span></div><div class="pin gold" style="left:72%;top:62%"><span>🏋️</span></div><div class="pin" style="left:35%;top:65%"><span>🧸</span></div>
+ </div>
+ <div class="section-head"><h2>Servizi salvati</h2><button onclick="openModule('nearby')">Aggiungi</button></div>
+ <div class="list">${renderList('services',x=>`<strong>${esc(x.name)}</strong><small>${esc(x.cat)} · ${esc(x.phone||'')}</small>`)}</div>
+ `;
+}
+function openMapsSearch(){
+ const cat=$('#nearCat').value, city=$('#nearCity').value.trim();
+ if(city){S.profile.city=city;localStorage.setItem(KEY,JSON.stringify(S))}
+ const q=encodeURIComponent(cat+(city?' '+city:''));
+ window.open('https://www.google.com/maps/search/?api=1&query='+q,'_blank');
+}
+
+function renderAgenda(){
+ const ev=[...S.logs.events].sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+ $('#view').innerHTML=`
+ <div class="section-head"><h2>📅 Calendario Queen</h2><button onclick="openModule('calendar')">＋ Aggiungi</button></div>
+ <div class="card"><h3>Prossimi appuntamenti</h3><div class="list">${ev.length?ev.map(x=>`<div class="list-item"><strong>${esc(x.title)}</strong><small>${esc(x.date)} ${esc(x.time||'')} · ${esc(x.cat)}</small><div class="actions"><button class="mini" onclick="del('events',${x.id})">Rimuovi</button></div></div>`).join(''):'<div class="empty">Nessun appuntamento.</div>'}</div></div>
+ <div class="card"><h3>🔔 Notifiche Smart</h3><p>Attiva il permesso del browser per ricevere notifiche quando l’app è in uso o supportata dal dispositivo.</p><button class="btn" onclick="askNotifications()">Attiva notifiche</button></div>
+ `;
+}
+function renderProfile(){
+ $('#view').innerHTML=`
+ <div class="section-head"><h2>👤 Profilo Queen</h2><span class="tag">Dati locali</span></div>
+ <div class="card"><div class="row"><img src="mary-logo.png" style="width:76px;height:76px;border-radius:20px;object-fit:cover;flex:0 0 auto"><div><h3>${esc(S.profile.name||'La tua Queen')}</h3><p>${esc(S.profile.email||'Completa il profilo')}</p><div class="tag">⭐ ${S.xp} XP</div></div></div></div>
+ <div class="card"><h3>Dati personali</h3><label class="label">Nome</label><input id="pName" value="${esc(S.profile.name)}"><label class="label">Email</label><input id="pEmail" value="${esc(S.profile.email)}"><label class="label">Telefono</label><input id="pPhone" value="${esc(S.profile.phone)}"><label class="label">Città</label><input id="pCity" value="${esc(S.profile.city)}"><button class="btn full" style="margin-top:9px" onclick="saveProfile()">Salva profilo</button></div>
+ <div class="card"><h3>Lingua</h3><select id="pLang" onchange="changeLang(this.value)"><option value="it" ${S.profile.language==='it'?'selected':''}>🇮🇹 Italiano</option><option value="ro" ${S.profile.language==='ro'?'selected':''}>🇷🇴 Română</option><option value="en" ${S.profile.language==='en'?'selected':''}>🇬🇧 English</option></select></div>
+ <div class="card"><h3>Backup & privacy</h3><div class="stack"><button class="btn" onclick="exportBackup()">Esporta backup JSON</button><label class="btn alt" style="text-align:center">Importa backup<input type="file" accept=".json" hidden onchange="importBackup(this.files[0])"></label><button class="btn alt" onclick="shareApp()">Condividi MARY</button><button class="btn danger" onclick="resetData()">Azzera dati locali</button></div></div>
+ <img class="promo" src="mary-queen-board.jpg" alt="MARY Queen Edition">
+ `;
+}
+
+function openModule(moduleId){
+ const m=MODULES.find(x=>x.id===moduleId); if(!m)return;
+ $('#sheetContent').innerHTML=`<div class="module-hero"><img src="${imgSrc(m)}" alt="${esc(m.title)}"><div><div class="icon">${m.icon}</div><h2>${esc(m.title)}</h2><p>${esc(m.desc)}</p><span class="tag">${esc(m.group)}</span></div></div>${moduleBody(m.id)}`;
+ $('#sheet').classList.remove('hidden');
+}
+function closeSheet(){$('#sheet').classList.add('hidden')}
+function genericNotes(id,title='Note personali'){
+ const arr=S.logs.notes[id]||[];
+ return `<div class="card"><h3>📝 ${title}</h3><textarea id="note_${id}" placeholder="Scrivi qui..."></textarea><button class="btn full" style="margin-top:8px" onclick="addNote('${id}')">Salva nota</button><div class="list">${arr.slice(0,8).map(x=>`<div class="list-item"><strong>${esc(x.date)}</strong><small>${esc(x.text)}</small><div class="actions"><button class="mini" onclick="deleteNote('${id}',${x.id})">Rimuovi</button></div></div>`).join('')}</div></div>`;
+}
+function addNote(mid){const e=$(`#note_${mid}`);if(!e||!e.value.trim())return;S.logs.notes[mid]=S.logs.notes[mid]||[];S.logs.notes[mid].unshift({id:id(),date:new Date().toLocaleString(),text:e.value.trim()});addXP(2);save();openModule(mid)}
+function deleteNote(mid,uid){S.logs.notes[mid]=(S.logs.notes[mid]||[]).filter(x=>x.id!==uid);save();openModule(mid)}
+
+function moduleBody(mid){
+ switch(mid){
+ case 'welcome': return `<img class="promo" src="mary-queen-board.jpg"><div class="card"><h3>MARY – Queen Edition</h3><p>Una compagna digitale pensata per organizzare salute, bellezza, lavoro, maternità, servizi, casa e benessere.</p><button class="btn gold full" onclick="closeSheet()">Entra in MARY</button></div>`;
+ case 'login': case 'profile': return `<div class="card"><h3>Profilo locale</h3><input id="mName" value="${esc(S.profile.name)}" placeholder="Nome"><input id="mEmail" value="${esc(S.profile.email)}" placeholder="Email" style="margin-top:7px"><input id="mPhone" value="${esc(S.profile.phone)}" placeholder="Telefono" style="margin-top:7px"><button class="btn full" style="margin-top:8px" onclick="saveModuleProfile()">Salva</button><p>Il profilo resta sul tuo dispositivo finché non esporti un backup.</p></div>`;
+ case 'dashboard': case 'widget': return `<div class="grid2"><div class="metric"><div class="label">💧 Acqua</div><div class="value">${S.today.water}/8</div><div class="row"><button class="mini" onclick="water(-1)">−</button><button class="mini" onclick="water(1)">＋</button></div></div><div class="metric"><div class="label">🚶 Passi</div><div class="value">${S.today.steps}</div><input id="stepEdit" type="number" value="${S.today.steps}" onchange="updateSteps(this.value)"></div><div class="metric"><div class="label">😴 Sonno</div><div class="value">${S.today.sleep}h</div><input type="range" min="0" max="12" step=".5" value="${S.today.sleep}" oninput="updateSleep(this.value)"></div><div class="metric"><div class="label">😊 Umore</div><div class="value">${S.today.mood}</div><select onchange="updateMood(this.value)"><option>😊</option><option>😌</option><option>😐</option><option>😔</option><option>😣</option></select></div></div>`;
+ case 'health': return `<div class="card"><h3>🌸 Ciclo mestruale</h3><label class="label">Ultimo ciclo</label><input id="cycleDate" type="date" value="${esc(S.health.cycleDate)}"><label class="label">Durata media</label><input id="cycleLen" type="number" value="${S.health.cycleLen}"><label class="label">Sintomi / note</label><textarea id="symptoms">${esc(S.health.symptoms)}</textarea><button class="btn full" onclick="saveHealth()">Salva salute</button>${cycleInfo()}</div>`+genericNotes(mid,'Diario salute');
+ case 'pregnancy': return `<div class="card"><h3>🤰 MARY Mamma</h3><label class="label">Data inizio gravidanza / ultima mestruazione</label><input id="pregStart" type="date" value="${esc(S.health.pregnancyStart)}"><label class="label">Data presunta parto</label><input id="dueDate" type="date" value="${esc(S.health.dueDate)}"><button class="btn full" onclick="savePregnancy()">Salva</button>${pregnancyInfo()}</div>`+genericNotes(mid,'Diario gravidanza');
+ case 'menopause': return `<div class="card"><h3>🌷 Premenopausa & Menopausa</h3><textarea id="menoNotes" placeholder="Sintomi, sonno, vampate, umore...">${esc(S.health.meno)}</textarea><button class="btn full" onclick="saveMenopause()">Salva diario</button><p>Usa queste note per preparare meglio eventuali colloqui con il tuo medico.</p></div>`+genericNotes(mid);
+ case 'mental': return `<div class="card"><h3>🧠 Check-in</h3><label class="label">Umore</label><select id="mentalMood"><option>😊</option><option>😌</option><option>😐</option><option>😔</option><option>😣</option></select><label class="label">Stress: <b id="stressOut">${S.health.stress}</b>/10</label><input id="stress" type="range" min="0" max="10" value="${S.health.stress}" oninput="stressOut.textContent=this.value"><button class="btn full" onclick="saveMental()">Salva check-in</button><p>Se sei in pericolo immediato, contatta i servizi di emergenza del tuo Paese.</p></div>`+genericNotes(mid,'Diario benessere');
+ case 'mentalDiary': case 'gratitude': return `<div class="card"><h3>${mid==='gratitude'?'🙏 Gratitudine':'💜 Diario dell’umore'}</h3><textarea id="diaryEntry" placeholder="${mid==='gratitude'?'Scrivi 3 cose belle di oggi...':'Come ti senti oggi?'}"></textarea><button class="btn full" onclick="addDiary('${mid}')">Salva</button><div class="list">${(mid==='gratitude'?S.logs.gratitude:S.logs.diary).slice(0,10).map(x=>`<div class="list-item"><strong>${esc(x.date)}</strong><small>${esc(x.text)}</small></div>`).join('')}</div></div>`;
+ case 'nutrition': case 'nutritionist': return `<div class="card"><h3>🥗 Piano nutrizione</h3><div class="row"><input id="w" type="number" step=".1" value="${esc(S.health.weight)}" placeholder="Peso kg"><input id="wg" value="${esc(S.health.weightGoal)}" placeholder="Obiettivo"></div><label class="label">Nutrizionista</label><input id="nutriName" value="${esc(S.health.nutritionist)}" placeholder="Nome professionista"><label class="label">Piano / note</label><textarea id="nutriNotes">${esc(S.health.nutritionNotes)}</textarea><button class="btn full" onclick="saveNutrition()">Salva</button></div><div class="card"><h3>🍽️ Diario pasti</h3><div class="row"><input id="mealName" placeholder="Pasto"><input id="mealNote" placeholder="Cosa hai mangiato"></div><button class="btn full" style="margin-top:8px" onclick="addMeal()">Aggiungi</button><div class="list">${renderList('meals',x=>`<strong>${esc(x.name)}</strong><small>${esc(x.note)} · ${esc(x.date)}</small>`)}</div></div>`;
+ case 'recipes': return `<div class="card"><h3>🍲 Ricettario 365</h3><input id="recipeName" placeholder="Nome ricetta"><textarea id="recipeIngredients" placeholder="Ingredienti e procedimento"></textarea><button class="btn full" onclick="addRecipe()">Salva ricetta</button><div class="list">${renderList('recipes',x=>`<strong>${esc(x.name)}</strong><small>${esc(x.text)}</small>`)}</div></div>`;
+ case 'fitness': case 'workout': return `<div class="card"><h3>🏋️ Allenamento</h3><div class="row"><select id="workType"><option>Camminata</option><option>Yoga</option><option>Pilates</option><option>Corpo completo</option><option>Glutei</option><option>Cardio</option><option>Stretching</option></select><input id="workMin" type="number" placeholder="Minuti"></div><button class="btn full" style="margin-top:8px" onclick="addWorkout()">Registra allenamento</button><div class="list">${renderList('workouts',x=>`<strong>${esc(x.type)} · ${x.min} min</strong><small>${esc(x.date)}</small>`)}</div></div><div class="card"><h3>⚡ Scheda rapida</h3><p>5 min riscaldamento · 3×12 squat · 3×10 affondi · 3×12 ponte glutei · 5 min stretching.</p></div>`;
+ case 'beauty': return `<div class="card"><h3>💄 Beauty routine</h3><input id="beautyTitle" placeholder="Es. Routine mattina"><textarea id="beautyText" placeholder="Detergente, siero, crema, SPF..."></textarea><button class="btn full" onclick="addBeauty()">Salva routine</button><div class="list">${renderList('beauty',x=>`<strong>${esc(x.title)}</strong><small>${esc(x.text)}</small>`)}</div></div>`;
+ case 'estetista': case 'hair': return `<div class="card"><h3>${mid==='hair'?'💇‍♀️ Parrucchiere':'✨ Estetista'}</h3><input id="apptName" placeholder="Nome professionista / salone"><div class="row" style="margin-top:7px"><input id="apptDate" type="date"><input id="apptTime" type="time"></div><input id="apptNote" placeholder="Trattamento / note" style="margin-top:7px"><button class="btn full" style="margin-top:8px" onclick="addAppointment('${mid}')">Salva appuntamento</button><div class="list">${S.logs.appointments.filter(x=>x.kind===mid).map(x=>`<div class="list-item"><strong>${esc(x.name)}</strong><small>${esc(x.date)} ${esc(x.time)} · ${esc(x.note)}</small></div>`).join('')}</div></div>`;
+ case 'jobs': return `<div class="card"><h3>💼 Offerte di lavoro</h3><input id="jobRole" placeholder="Ruolo"><input id="jobCompany" placeholder="Azienda" style="margin-top:7px"><select id="jobStatus" style="margin-top:7px"><option>Da valutare</option><option>Candidatura inviata</option><option>Colloquio</option><option>Chiusa</option></select><button class="btn full" style="margin-top:8px" onclick="addJob()">Salva offerta</button><div class="list">${renderList('jobs',x=>`<strong>${esc(x.role)} · ${esc(x.company)}</strong><small>${esc(x.status)}</small>`)}</div></div>`;
+ case 'cv': return `<div class="card"><h3>📄 Curriculum Builder</h3><input id="cvName" value="${esc(S.cv.name)}" placeholder="Nome e cognome"><div class="row" style="margin-top:7px"><input id="cvEmail" value="${esc(S.cv.email)}" placeholder="Email"><input id="cvPhone" value="${esc(S.cv.phone)}" placeholder="Telefono"></div><label class="label">Profilo</label><textarea id="cvProfile">${esc(S.cv.profile)}</textarea><label class="label">Esperienze</label><textarea id="cvExperience">${esc(S.cv.experience)}</textarea><label class="label">Formazione</label><textarea id="cvEducation">${esc(S.cv.education)}</textarea><label class="label">Competenze</label><textarea id="cvSkills">${esc(S.cv.skills)}</textarea><label class="label">Lingue</label><textarea id="cvLanguages">${esc(S.cv.languages)}</textarea><div class="row"><button class="btn" onclick="saveCV()">Salva</button><button class="btn alt" onclick="exportCV()">Esporta</button></div></div>`;
+ case 'nearby': case 'map': return `<div class="card"><h3>📍 Salva un professionista</h3><select id="srvCat"><option>Estetista</option><option>Parrucchiere</option><option>Palestra</option><option>Nutrizionista</option><option>Ginecologo</option><option>Psicologo</option><option>Pediatra</option><option>Babysitter</option><option>Pulizie casa</option></select><input id="srvName" placeholder="Nome" style="margin-top:7px"><input id="srvPhone" placeholder="Telefono" style="margin-top:7px"><button class="btn full" style="margin-top:8px" onclick="addService()">Salva contatto</button><button class="btn alt full" style="margin-top:8px" onclick="closeSheet();goto('nearby')">Apri mappa</button></div>`;
+ case 'calendar': return `<div class="card"><h3>📅 Nuovo appuntamento</h3><input id="eventTitle" placeholder="Titolo"><div class="row" style="margin-top:7px"><input id="eventDate" type="date"><input id="eventTime" type="time"></div><select id="eventCat" style="margin-top:7px"><option>Personale</option><option>Salute</option><option>Famiglia</option><option>Lavoro</option><option>Beauty</option></select><button class="btn full" style="margin-top:8px" onclick="addEvent()">Aggiungi</button></div>`;
+ case 'club': return `<div class="card"><h3>⭐ Livello Queen</h3><div class="kpi"><span>XP totali</span><b>${S.xp}</b></div><div class="meter"><i style="width:${S.xp%100}%"></i></div></div><div class="badges"><div class="badge"><b>💧</b><small>Water Queen</small></div><div class="badge"><b>🚶</b><small>Step Queen</small></div><div class="badge"><b>🧘</b><small>Calm Queen</small></div><div class="badge"><b>🏋️</b><small>Fitness Queen</small></div><div class="badge"><b>💄</b><small>Beauty Queen</small></div><div class="badge"><b>❤️</b><small>Self Love</small></div></div><div class="card"><h3>Sfida del giorno</h3><p>${esc(challenge())}</p><button class="btn gold full" onclick="completeChallenge()">Completata +10 XP</button></div>`;
+ case 'settings': return `<div class="card"><h3>⚙️ Impostazioni</h3><button class="btn alt full" onclick="toggleTheme()">Tema chiaro/scuro</button><button class="btn alt full" style="margin-top:7px" onclick="exportBackup()">Esporta backup</button><p>I dati sono salvati nel browser del dispositivo. Per spostarli altrove usa il backup.</p></div>`;
+ case 'notifications': return `<div class="card"><h3>🔔 Notifiche</h3><p>MARY può chiedere il permesso per notifiche browser. La consegna in background dipende dal dispositivo e dal browser.</p><button class="btn full" onclick="askNotifications()">Attiva notifiche</button></div>`;
+ case 'motivation': return `<div class="quote-big">“${esc(quote())}”</div><div class="card"><h3>💎 Sfida di oggi</h3><p>${esc(challenge())}</p><button class="btn gold full" onclick="completeChallenge()">Segna completata</button></div>`;
+ case 'sos': return `<div class="card"><h3>🛡️ SOS & Supporto</h3><p><b>In Italia:</b> 112 per emergenze. 1522 per antiviolenza e stalking.</p><div class="row"><a class="btn" href="tel:112">Chiama 112</a><a class="btn alt" href="tel:1522">Chiama 1522</a></div><label class="label">Contatto personale</label><input id="sosName" value="${esc(S.sos.contact)}" placeholder="Nome"><input id="sosPhone" value="${esc(S.sos.phone)}" placeholder="Telefono" style="margin-top:7px"><button class="btn full" style="margin-top:8px" onclick="saveSOS()">Salva contatto</button></div>`;
+ case 'magazine': return `<div class="card"><h3>📰 Magazine MARY</h3><div class="list"><div class="list-item"><strong>Routine serale semplice</strong><small>Prepara domani, abbassa le luci, scegli un’attività rilassante.</small></div><div class="list-item"><strong>Organizzare una visita</strong><small>Salva domande, esami precedenti e promemoria in Salute Donna.</small></div><div class="list-item"><strong>CV: il profilo professionale</strong><small>Scrivi 3–4 righe su esperienza, punti di forza e obiettivo.</small></div></div></div>`;
+ case 'language': return `<div class="card"><h3>🌍 Lingua</h3><select onchange="changeLang(this.value)"><option value="it" ${S.profile.language==='it'?'selected':''}>🇮🇹 Italiano</option><option value="ro" ${S.profile.language==='ro'?'selected':''}>🇷🇴 Română</option><option value="en" ${S.profile.language==='en'?'selected':''}>🇬🇧 English</option></select><p>La navigazione principale e le etichette essenziali cambiano lingua; alcuni contenuti specialistici restano in italiano in questa versione.</p></div>`;
+ case 'onboarding': return `<div class="card"><h3>💎 Configura MARY</h3><p>Completa nome, città e lingua per personalizzare la tua esperienza.</p><button class="btn full" onclick="closeSheet();goto('profile')">Vai al profilo</button></div>`;
+ case 'shopping': return `<div class="card"><h3>🛍️ Shopping Donna</h3><div class="filters"><span class="chip active">Moda</span><span class="chip">Beauty</span><span class="chip">Corpo</span><span class="chip">Regali</span></div><input id="shopName" placeholder="Articolo / idea"><div class="row" style="margin-top:7px"><input id="shopPrice" type="number" step=".01" placeholder="Budget €"><select id="shopCat"><option>Moda</option><option>Beauty</option><option>Cura corpo</option><option>Regalo</option></select></div><button class="btn full" style="margin-top:8px" onclick="addShopping()">Aggiungi wishlist</button><div class="list">${renderList('shopping',x=>`<strong>${esc(x.name)} · ${euro(x.price)}</strong><small>${esc(x.cat)}</small>`)}</div></div>`;
+ case 'babysitter': case 'cleaning': return `<div class="card"><h3>${mid==='babysitter'?'🧸 Babysitter':'🧹 Pulizie & Casa'}</h3><input id="svcPerson" placeholder="Nome / contatto"><input id="svcPhone" placeholder="Telefono" style="margin-top:7px"><textarea id="svcNotes" placeholder="Disponibilità, tariffa, note..." style="margin-top:7px"></textarea><button class="btn full" onclick="addExtraService('${mid}')">Salva contatto</button></div>`+genericNotes(mid);
+ case 'pediatrician': return `<div class="card"><h3>👶 Crescita Baby</h3><input id="babyName" value="${esc(S.health.babyName)}" placeholder="Nome baby"><input id="pedName" value="${esc(S.health.pediatrician)}" placeholder="Pediatra" style="margin-top:7px"><div class="row" style="margin-top:7px"><input id="babyWeight" value="${esc(S.health.babyWeight)}" type="number" step=".01" placeholder="Peso kg"><input id="babyHeight" value="${esc(S.health.babyHeight)}" type="number" step=".1" placeholder="Altezza cm"></div><button class="btn full" style="margin-top:8px" onclick="saveBaby()">Salva</button></div>`+genericNotes(mid,'Diario Baby');
+ case 'gynecologist': return `<div class="card"><h3>🩺 Ginecologo</h3><input id="gynName" value="${esc(S.health.gynName)}" placeholder="Nome ginecologo"><input id="gynPhone" value="${esc(S.health.gynPhone)}" placeholder="Telefono" style="margin-top:7px"><textarea id="gynNotes" placeholder="Esami, controlli, domande..." style="margin-top:7px">${esc(S.health.gynNotes)}</textarea><button class="btn full" onclick="saveGyn()">Salva</button></div>`+genericNotes(mid);
+ case 'wallet': return `<div class="card"><h3>💰 Wallet Premium</h3><div class="kpi"><span>Saldo registrato</span><b>${euro(S.logs.money.reduce((a,x)=>a+(x.type==='Entrata'?x.amount:-x.amount),0))}</b></div><div class="row"><select id="moneyType"><option>Spesa</option><option>Entrata</option></select><input id="moneyAmount" type="number" step=".01" placeholder="€"></div><input id="moneyNote" placeholder="Descrizione" style="margin-top:7px"><button class="btn full" style="margin-top:8px" onclick="addMoney()">Registra</button><div class="list">${renderList('money',x=>`<strong>${esc(x.type)} · ${euro(x.amount)}</strong><small>${esc(x.note)} · ${esc(x.date)}</small>`)}</div></div>`;
+ case 'meds': return `<div class="card"><h3>💊 Farmaci</h3><div class="row"><input id="medName" placeholder="Farmaco"><input id="medDose" placeholder="Dose/orario"></div><button class="btn full" style="margin-top:8px" onclick="addMed()">Aggiungi</button><div class="list">${renderList('meds',x=>`<strong>${esc(x.name)}</strong><small>${esc(x.dose)}</small>`)}</div></div><div class="card"><h3>🩺 Visite</h3><div class="row"><input id="visitName" placeholder="Visita"><input id="visitDate" type="date"></div><button class="btn full" style="margin-top:8px" onclick="addVisit()">Aggiungi</button><div class="list">${renderList('visits',x=>`<strong>${esc(x.name)}</strong><small>${esc(x.date)}</small>`)}</div></div>`;
+ case 'family': return `<div class="card"><h3>🏡 Casa & Famiglia</h3><div class="row"><input id="homeTask" placeholder="Nuovo compito"><button class="btn auto" onclick="addHomeTask()">＋</button></div><div class="list">${S.logs.homeTasks.map(x=>`<div class="list-item"><strong>${x.done?'✅':'⬜'} ${esc(x.text)}</strong><div class="actions"><button class="mini" onclick="toggleHomeTask(${x.id})">Fatto</button><button class="mini" onclick="del('homeTasks',${x.id})">Rimuovi</button></div></div>`).join('')}</div></div>`;
+ default:return genericNotes(mid);
+ }
+}
+function renderList(list,renderer){const a=S.logs[list]||[];return a.length?a.slice(0,20).map(x=>`<div class="list-item">${renderer(x)}<div class="actions"><button class="mini" onclick="del('${list}',${x.id})">Rimuovi</button></div></div>`).join(''):'<div class="empty">Nessun elemento salvato.</div>'}
+
+function water(d){S.today.water=Math.max(0,Math.min(12,S.today.water+d));if(d>0)addXP(1);save()}
+function updateSteps(v){S.today.steps=Number(v)||0;save()}
+function updateSleep(v){S.today.sleep=Number(v);save()}
+function updateMood(v){S.today.mood=v;save()}
+function completeChallenge(){addXP(10);save('Brava Queen! +10 XP')}
+function saveProfile(){S.profile.name=$('#pName').value.trim();S.profile.email=$('#pEmail').value.trim();S.profile.phone=$('#pPhone').value.trim();S.profile.city=$('#pCity').value.trim();save()}
+function saveModuleProfile(){S.profile.name=$('#mName').value.trim();S.profile.email=$('#mEmail').value.trim();S.profile.phone=$('#mPhone').value.trim();addXP(2);save();openModule('login')}
+function changeLang(v){S.profile.language=v;save()}
+function toggleTheme(){S.settings.dark=!S.settings.dark;save();openModule('settings')}
+function saveHealth(){S.health.cycleDate=$('#cycleDate').value;S.health.cycleLen=Number($('#cycleLen').value)||28;S.health.symptoms=$('#symptoms').value;addXP(3);save();openModule('health')}
+function cycleInfo(){if(!S.health.cycleDate)return '<p>Inserisci l’ultimo ciclo per avere una stima indicativa.</p>';const d=new Date(S.health.cycleDate+'T12:00:00');d.setDate(d.getDate()+Number(S.health.cycleLen||28));return `<p>Prossimo ciclo stimato: <b>${d.toLocaleDateString()}</b>. È solo una stima personale, non una previsione medica.</p>`}
+function savePregnancy(){S.health.pregnancyStart=$('#pregStart').value;S.health.dueDate=$('#dueDate').value;save();openModule('pregnancy')}
+function pregnancyInfo(){if(!S.health.pregnancyStart)return '<p>Inserisci una data per calcolare una settimana indicativa.</p>';const days=Math.floor((Date.now()-new Date(S.health.pregnancyStart+'T12:00:00'))/86400000);const wk=Math.max(0,Math.floor(days/7));return `<p>Settimana indicativa: <b>${wk}</b>. Per datazione e controlli usa sempre le indicazioni del professionista.</p>`}
+function saveMenopause(){S.health.meno=$('#menoNotes').value;save();openModule('menopause')}
+function saveMental(){S.health.mood=$('#mentalMood').value;S.health.stress=Number($('#stress').value);S.today.mood=S.health.mood;save();openModule('mental')}
+function addDiary(kind){const e=$('#diaryEntry');if(!e.value.trim())return;const list=kind==='gratitude'?'gratitude':'diary';S.logs[list].unshift({id:id(),date:new Date().toLocaleString(),text:e.value.trim()});addXP(3);save();openModule(kind)}
+function saveNutrition(){S.health.weight=$('#w').value;S.health.weightGoal=$('#wg').value;S.health.nutritionist=$('#nutriName').value;S.health.nutritionNotes=$('#nutriNotes').value;save();openModule('nutrition')}
+function addMeal(){if(!$('#mealName').value.trim())return;S.logs.meals.unshift({id:id(),name:$('#mealName').value.trim(),note:$('#mealNote').value.trim(),date:todayISO()});addXP(2);save();openModule('nutrition')}
+function addRecipe(){if(!$('#recipeName').value.trim())return;S.logs.recipes.unshift({id:id(),name:$('#recipeName').value.trim(),text:$('#recipeIngredients').value.trim()});addXP(3);save();openModule('recipes')}
+function addWorkout(){S.logs.workouts.unshift({id:id(),type:$('#workType').value,min:Number($('#workMin').value)||0,date:todayISO()});addXP(5);save();openModule('fitness')}
+function addBeauty(){if(!$('#beautyTitle').value.trim())return;S.logs.beauty.unshift({id:id(),title:$('#beautyTitle').value.trim(),text:$('#beautyText').value.trim()});addXP(2);save();openModule('beauty')}
+function addAppointment(kind){if(!$('#apptName').value.trim())return;S.logs.appointments.unshift({id:id(),kind,name:$('#apptName').value.trim(),date:$('#apptDate').value,time:$('#apptTime').value,note:$('#apptNote').value.trim()});save();openModule(kind)}
+function addJob(){if(!$('#jobRole').value.trim())return;S.logs.jobs.unshift({id:id(),role:$('#jobRole').value.trim(),company:$('#jobCompany').value.trim(),status:$('#jobStatus').value});addXP(3);save();openModule('jobs')}
+function saveCV(){S.cv={name:$('#cvName').value,email:$('#cvEmail').value,phone:$('#cvPhone').value,profile:$('#cvProfile').value,experience:$('#cvExperience').value,education:$('#cvEducation').value,skills:$('#cvSkills').value,languages:$('#cvLanguages').value};addXP(5);save();openModule('cv')}
+function exportCV(){saveCV();const c=S.cv;const txt=`${c.name}
+${c.email} | ${c.phone}
+
+PROFILO
+${c.profile}
+
+ESPERIENZA
+${c.experience}
+
+FORMAZIONE
+${c.education}
+
+COMPETENZE
+${c.skills}
+
+LINGUE
+${c.languages}`;download('MARY_CV.txt',txt,'text/plain')}
+function addService(){if(!$('#srvName').value.trim())return;S.logs.services.unshift({id:id(),cat:$('#srvCat').value,name:$('#srvName').value.trim(),phone:$('#srvPhone').value.trim()});save();openModule('nearby')}
+function addEvent(){if(!$('#eventTitle').value.trim()||!$('#eventDate').value)return;S.logs.events.unshift({id:id(),title:$('#eventTitle').value.trim(),date:$('#eventDate').value,time:$('#eventTime').value,cat:$('#eventCat').value});addXP(2);save();closeSheet();goto('agenda')}
+async function askNotifications(){if(!('Notification'in window)){toast('Notifiche non supportate');return}const p=await Notification.requestPermission();toast('Notifiche: '+p);if(p==='granted')new Notification('MARY Queen',{body:'Notifiche attivate 👑',icon:'icon-192.png'})}
+function saveSOS(){S.sos.contact=$('#sosName').value;S.sos.phone=$('#sosPhone').value;save();openModule('sos')}
+function addShopping(){if(!$('#shopName').value.trim())return;S.logs.shopping.unshift({id:id(),name:$('#shopName').value.trim(),price:Number($('#shopPrice').value)||0,cat:$('#shopCat').value});addXP(2);save();openModule('shopping')}
+function addExtraService(kind){if(!$('#svcPerson').value.trim())return;S.logs.services.unshift({id:id(),cat:kind==='babysitter'?'Babysitter':'Pulizie casa',name:$('#svcPerson').value.trim(),phone:$('#svcPhone').value.trim(),notes:$('#svcNotes').value.trim()});save();openModule(kind)}
+function saveBaby(){S.health.babyName=$('#babyName').value;S.health.pediatrician=$('#pedName').value;S.health.babyWeight=$('#babyWeight').value;S.health.babyHeight=$('#babyHeight').value;save();openModule('pediatrician')}
+function saveGyn(){S.health.gynName=$('#gynName').value;S.health.gynPhone=$('#gynPhone').value;S.health.gynNotes=$('#gynNotes').value;save();openModule('gynecologist')}
+function addMoney(){const amount=Number($('#moneyAmount').value)||0;if(!amount)return;S.logs.money.unshift({id:id(),type:$('#moneyType').value,amount,note:$('#moneyNote').value.trim(),date:todayISO()});save();openModule('wallet')}
+function addMed(){if(!$('#medName').value.trim())return;S.logs.meds.unshift({id:id(),name:$('#medName').value.trim(),dose:$('#medDose').value.trim()});save();openModule('meds')}
+function addVisit(){if(!$('#visitName').value.trim())return;S.logs.visits.unshift({id:id(),name:$('#visitName').value.trim(),date:$('#visitDate').value});save();openModule('meds')}
+function addHomeTask(){if(!$('#homeTask').value.trim())return;S.logs.homeTasks.unshift({id:id(),text:$('#homeTask').value.trim(),done:false});save();openModule('family')}
+function toggleHomeTask(uid){const x=S.logs.homeTasks.find(a=>a.id===uid);if(x){x.done=!x.done;if(x.done)addXP(2)}save();openModule('family')}
+
+function exportBackup(){download('MARY_Queen_Backup.json',JSON.stringify(S,null,2),'application/json')}
+function importBackup(file){if(!file)return;const r=new FileReader();r.onload=()=>{try{S=deepMerge(clone(DEFAULT),JSON.parse(r.result));save('Backup importato')}catch(e){toast('Backup non valido')}};r.readAsText(file)}
+function download(name,data,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+async function shareApp(){if(navigator.share){try{await navigator.share({title:'MARY – Queen Edition',text:'MARY Queen',url:location.href})}catch(e){}}else{navigator.clipboard?.writeText(location.href);toast('Link copiato')}}
+function resetData(){if(confirm('Cancellare tutti i dati MARY salvati su questo dispositivo?')){localStorage.removeItem(KEY);S=clone(DEFAULT);save('Dati azzerati')}}
+
+$$('.nav').forEach(n=>n.addEventListener('click',()=>goto(n.dataset.view)));
+$('#sheetClose').addEventListener('click',closeSheet);
+$('#sheet').addEventListener('click',e=>{if(e.target===$('#sheet'))closeSheet()});
+$('#themeBtn').addEventListener('click',()=>{S.settings.dark=!S.settings.dark;save()});
+$('#brandHome').addEventListener('click',()=>goto('home'));
+render();
+
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}))}
+
+</script>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
-      const reg = await navigator.serviceWorker.register('./service-worker.js', {updateViaCache: 'none'});
+      const reg = await navigator.serviceWorker.register('./service-worker.js', {updateViaCache:'none'});
       await reg.update();
     } catch (e) {
       console.warn('MARY service worker:', e);
