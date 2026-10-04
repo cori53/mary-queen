@@ -282,17 +282,17 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
 </main>
 
 <nav class="bottom">
-<button class="navbtn active" data-page="home"><span class="ico">👑</span><span data-i="home">Home</span></button>
-<button class="navbtn" data-page="health"><span class="ico">🌸</span><span data-i="health">Salute</span></button>
-<button class="navbtn" data-page="life"><span class="ico">✨</span><span data-i="life">Vita</span></button>
-<button class="navbtn" data-page="agenda"><span class="ico">📅</span><span data-i="agenda">Agenda</span></button>
-<button class="navbtn" data-page="profile"><span class="ico">⚙️</span><span data-i="profile">Profilo</span></button>
+<button type="button" class="navbtn active" data-page="home" onclick="openPage('home')"><span class="ico">👑</span><span data-i="home">Home</span></button>
+<button type="button" class="navbtn" data-page="health" onclick="openPage('health')"><span class="ico">🌸</span><span data-i="health">Salute</span></button>
+<button type="button" class="navbtn" data-page="life" onclick="openPage('life')"><span class="ico">✨</span><span data-i="life">Vita</span></button>
+<button type="button" class="navbtn" data-page="agenda" onclick="openPage('agenda')"><span class="ico">📅</span><span data-i="agenda">Agenda</span></button>
+<button type="button" class="navbtn" data-page="profile" onclick="openPage('profile')"><span class="ico">⚙️</span><span data-i="profile">Profilo</span></button>
 </nav>
 <div class="toast" id="toast">Salvato</div>
 </div>
 
 <script>
-const KEY='maryV4Working';
+const KEY='maryV5NavFix';
 const defaultState={
   water:0,sleep:7.5,steps:0,mood:'😊',dark:false,lang:'it',
   missions:[],events:[],meds:[],visits:[],workouts:[],recipes:[],shopping:[],homeTasks:[],money:[],diary:[],
@@ -311,11 +311,15 @@ function fmtDate(x){if(!x)return'';try{return new Date(x+'T12:00:00').toLocaleDa
 function uid(){return Date.now()+Math.random()}
 function setv(id,val){const el=document.getElementById(id);if(el)el.value=val??''}
 
-document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('.navbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');
-  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(b.dataset.page).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-});
+function openPage(id){
+  const page=document.getElementById(id);
+  if(!page)return;
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  page.classList.add('active');
+  document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.page===id));
+  window.scrollTo(0,0);
+}
+window.openPage=openPage;
 document.getElementById('themeBtn').onclick=()=>{S.dark=!S.dark;save()};
 
 function water(d){S.water=Math.max(0,Math.min(8,S.water+d));save()}
