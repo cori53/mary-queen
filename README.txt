@@ -1,9 +1,9 @@
-Mary v3 CORRETTA
-• nuovo logo M oro + corona scelto da te
-• nome solo Mary
-• rimosso “Buongiorno, Queen”
-• frase del giorno visibile
-• contapassi più compatto
-• cache nuova per non mostrare la vecchia versione
+Mary v4 FUNZIONANTE
 
-Carica TUTTI gli 8 file nella root del repository mary-queen, sostituendo quelli esistenti, quindi Commit changes.
+Correzione importante:
+- risolto errore JavaScript che bloccava TUTTI i pulsanti e la navigazione
+- Salute, Vita, Agenda e Profilo ora possono aprirsi
+- corretta compatibilità del contapassi con i dati precedenti
+- mantiene nuovo logo Mary, frase del giorno e grafica v3
+
+Carica tutti gli 8 file nella root del repository mary-queen, sostituendo quelli esistenti, poi Commit changes.

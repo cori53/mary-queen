@@ -292,7 +292,7 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
 </div>
 
 <script>
-const KEY='maryV3Corrected';
+const KEY='maryV4Working';
 const defaultState={
   water:0,sleep:7.5,steps:0,mood:'😊',dark:false,lang:'it',
   missions:[],events:[],meds:[],visits:[],workouts:[],recipes:[],shopping:[],homeTasks:[],money:[],diary:[],
@@ -320,18 +320,18 @@ document.getElementById('themeBtn').onclick=()=>{S.dark=!S.dark;save()};
 
 function water(d){S.water=Math.max(0,Math.min(8,S.water+d));save()}
 function setSleep(v){S.sleep=Number(v);localStorage.setItem(KEY,JSON.stringify(S));document.getElementById('sleepVal').textContent=S.sleep}
-function saveSteps(){S.steps=Number(document.getElementById('stepsInput').value||0);save()}
+function saveSteps(){ensureStepsDay();S.steps.count=Math.max(0,Number(document.getElementById('stepsInput').value||0));save()}
 function setMood(v){S.mood=v;save()}
 function addMission(){let t=document.getElementById('missionText').value.trim();if(!t)return;S.missions.unshift({id:uid(),t,done:false});document.getElementById('missionText').value='';save()}
 function toggleMission(id){let m=S.missions.find(x=>x.id==id);if(m)m.done=!m.done;save()}
 function del(arr,id){S[arr]=S[arr].filter(x=>x.id!=id);save()}
 
-function saveCycle(){S.cycle={date:cycleDate.value,len:Number(cycleLen.value||28),period:Number(periodLen.value||5),symptoms:cycleSymptoms.value};save()};save()}
+function saveCycle(){S.cycle={date:cycleDate.value,len:Number(cycleLen.value||28),period:Number(periodLen.value||5),symptoms:cycleSymptoms.value};save()}
 
 
 function todayKey(){return new Date().toISOString().slice(0,10)}
 function ensureStepsDay(){
-  if(!S.steps) S.steps={date:'',count:0,goal:8000,week:[]};
+  if(!S.steps || typeof S.steps!=='object') S.steps={date:'',count:Number(S.steps)||0,goal:8000,week:[]};
   if(S.steps.date!==todayKey()){
     if(S.steps.date && S.steps.count>0){
       S.steps.week=(S.steps.week||[]).filter(x=>x.date!==S.steps.date);
@@ -451,7 +451,10 @@ function applyLang(){const d=langData[S.lang]||langData.it;document.querySelecto
 function render(){
   document.body.classList.toggle('dark',!!S.dark);
   waterVal.textContent=S.water;waterBar.style.width=(S.water/8*100)+'%';
-  sleepVal.textContent=S.sleep;sleepInput.value=S.sleep;stepsVal.textContent=S.steps;stepsInput.value=S.steps||'';moodVal.textContent=S.mood;moodInput.value=S.mood;
+  sleepVal.textContent=S.sleep;sleepInput.value=S.sleep;
+  const stepCount=(S.steps&&typeof S.steps==='object')?(Number(S.steps.count)||0):(Number(S.steps)||0);
+  stepsVal.textContent=stepCount;stepsInput.value=stepCount||'';
+  moodVal.textContent=S.mood;moodInput.value=S.mood;
   missions.innerHTML=S.missions.length?S.missions.map(m=>`<div class="mission item"><input type="checkbox" ${m.done?'checked':''} onchange="toggleMission(${m.id})"><span style="text-decoration:${m.done?'line-through':'none'}">${esc(m.t)}</span><button class="btn secondary auto" onclick="del('missions',${m.id})">×</button></div>`).join(''):'<p class="note">Nessuna missione ancora.</p>';
   const upcoming=S.events.filter(e=>e.date>=new Date().toISOString().slice(0,10)).slice(0,3);
   homeEvents.innerHTML=upcoming.length?upcoming.map(e=>`<div class="item"><strong>${esc(e.title)}</strong><small>${fmtDate(e.date)} ${esc(e.time)} · ${esc(e.cat)}</small></div>`).join(''):'<p class="note">Nessun appuntamento futuro.</p>';
