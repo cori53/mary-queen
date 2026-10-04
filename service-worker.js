@@ -1,47 +1,5 @@
-const CACHE = 'mary-queen-install-fix-v4';
-const CORE = [
-  './',
-  './index.html',
-  './styles.css',
-  './app.js',
-  './manifest.json',
-  './mary-logo.png',
-  './icon-192.png',
-  './icon-512.png',
-  './icon-512-maskable.png'
-];
-
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE).then(async cache => {
-      for (const url of CORE) {
-        try { await cache.add(url); } catch (e) { /* don't block install */ }
-      }
-    })
-  );
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
-    )
-  );
-  self.clients.claim();
-});
-
-self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
-  event.respondWith(
-    fetch(event.request)
-      .then(response => {
-        if (response && response.ok) {
-          const copy = response.clone();
-          caches.open(CACHE).then(cache => cache.put(event.request, copy)).catch(() => {});
-        }
-        return response;
-      })
-      .catch(() => caches.match(event.request).then(r => r || caches.match('./index.html')))
-  );
-});
+const CACHE='mary-full-2026-v2';
+const CORE=['./','./index.html','./manifest.json','./mary-logo.png','./icon-192.png','./icon-512.png','./icon-512-maskable.png'];
+self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
+self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(r=>{let x=r.clone();caches.open(CACHE).then(c=>c.put(e.request,x));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});

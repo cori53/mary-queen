@@ -1,19 +1,13 @@
 {
   "id": "./",
-  "name": "MARY – Queen Edition",
-  "short_name": "MARY",
-  "description": "MARY Queen: salute donna, servizi, lavoro e CV, maternità, fitness, nutrizione, beauty, casa e organizzazione personale.",
+  "name": "Mary",
+  "short_name": "Mary",
+  "description": "Mary: salute donna, ciclo, nutrizione, ricette, fitness, contapassi, beauty, famiglia, lavoro e organizzazione personale.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "display_override": [
-    "standalone",
-    "minimal-ui"
-  ],
-  "background_color": "#12071d",
-  "theme_color": "#6f249c",
-  "orientation": "portrait-primary",
-  "prefer_related_applications": false,
+  "background_color": "#fbf7ff",
+  "theme_color": "#7627a8",
   "icons": [
     {
       "src": "./icon-192.png",
