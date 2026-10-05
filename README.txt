@@ -1,7 +1,12 @@
-Mary v5 NAV FIX
-- corretto il blocco che rendeva molte funzioni non accessibili
-- Home / Salute / Vita / Agenda / Profilo hanno navigazione esplicita
-- corrette le funzioni interne
-- cache nuova
+Mary v6 — ciclo smart + Mary Oggi + base Comunità
 
-Carica tutti gli 8 file nella root del repository mary-queen, sostituendo quelli esistenti.
+Novità:
+- Mary Oggi con riepilogo quotidiano
+- ciclo automatico con 4 fasi
+- sintomi selezionabili con un tocco e intensità
+- suggerimenti automatici della fase
+- previsione ovulazione e prossimo ciclo (stime)
+- base Comunità Mary privata sul dispositivo, pronta per futuro backend moderato
+- mantiene tutte le funzioni della v5
+
+Carica gli 8 file nella root GitHub sostituendo quelli esistenti.

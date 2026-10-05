@@ -58,6 +58,8 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
 .steps-compact input{padding:8px 10px}
 .steps-compact button{padding:9px 10px}
 .steps-compact p.note{font-size:11px;line-height:1.3;margin-top:7px}
+
+.symptom-grid{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}.symptom-btn{background:var(--bg);color:var(--text);border:1px solid var(--line);padding:8px 10px;font-size:12px}.symptom-btn.active{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;border-color:transparent}.today-box{border-left:4px solid var(--gold)}.community-post{border:1px solid var(--line);border-radius:15px;padding:11px;background:var(--bg);margin-top:8px}.community-post .meta{font-size:11px;color:var(--muted);margin-bottom:5px}.support-btn{background:var(--card);color:var(--primary);border:1px solid var(--line);font-size:11px;padding:7px 9px}.mini-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
 </style>
 </head>
 <body>
@@ -75,6 +77,7 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
 <main>
 <section class="page active" id="home">
   <div class="hero"><h2 id="hello">Buongiorno 💜</h2><p>Una sola app per salute, benessere, famiglia, lavoro e quotidianità.</p></div>
+  <div class="card wide today-box" style="margin-bottom:12px"><h3>💜 Mary Oggi</h3><div id="maryToday"><p class="note">Aggiungi la data del ciclo per ricevere un riepilogo personalizzato.</p></div></div>
   <div class="card wide" style="margin-bottom:12px"><h3>👑 Frase del giorno</h3><div class="quote" id="dailyQuote">Ogni piccolo passo costruisce la tua forza.</div><p class="note" style="text-align:center">Un piccolo pensiero per iniziare la giornata.</p></div>
 <div class="card wide steps-compact" style="margin-bottom:12px">
   <h3>👟 Contapassi</h3>
@@ -110,9 +113,12 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
 
   <details class="module" open><summary>🌸 Ciclo completo & Ginecologo</summary><div class="module-body">
     <div class="row"><div><label>Ultimo ciclo</label><input type="date" id="cycleDate"></div><div><label>Durata media ciclo</label><input type="number" id="cycleLen" min="20" max="45" value="28"></div></div>
-    <div class="row"><div><label>Durata mestruazioni</label><input type="number" id="periodLen" min="2" max="10" value="5"></div><div><label>Sintomi oggi</label><input id="cycleSymptoms" placeholder="Crampi, energia, pelle..."></div></div>
-    <button style="margin-top:10px;width:100%" onclick="saveCycle()">Calcola e salva ciclo</button>
-    <div class="info-box"><strong id="cycleToday">Inserisci la data dell'ultimo ciclo.</strong><div id="cycleForecast" class="note" style="margin-top:5px"></div></div>
+    <div class="row"><div><label>Durata mestruazioni</label><input type="number" id="periodLen" min="2" max="10" value="5"></div><div><label>Intensità sintomi</label><select id="symptomIntensity" onchange="saveCycle()"><option value="leggeri">Leggeri</option><option value="medi">Medi</option><option value="forti">Forti</option></select></div></div>
+    <label>Sintomi oggi — tocca, senza scrivere</label>
+    <div class="symptom-grid" id="symptomGrid"></div>
+    <label>Nota facoltativa</label><input id="cycleSymptoms" placeholder="Scrivi solo se vuoi aggiungere qualcosa">
+    <button style="margin-top:10px;width:100%" onclick="saveCycle()">Salva ciclo</button>
+    <div class="info-box"><strong id="cycleToday">Inserisci la data dell'ultimo ciclo.</strong><div id="cycleForecast" class="note" style="margin-top:5px"></div><div id="phaseAdvice" style="margin-top:8px"></div></div>
     <h3>Le 4 fasi</h3>
     <div class="phase-grid">
       <div class="phase"><b>🩸 Mestruale</b>Riposo, ascolto del corpo e movimento dolce se ti fa stare bene.</div>
@@ -159,7 +165,7 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
     <label>Note crescita</label><textarea id="babyNotes"></textarea><button onclick="saveBaby()">Salva</button>
   </div></details>
 
-  <details class="module"><summary>🧠 Mental Health Queen</summary><div class="module-body">
+  <details class="module"><summary>🧠 Benessere mentale</summary><div class="module-body">
     <label>Come ti senti oggi?</label><textarea id="mentalNote" placeholder="Scrivi liberamente..."></textarea>
     <label>Stress: <span id="stressVal">5</span>/10</label><input id="stress" type="range" min="0" max="10" value="5" oninput="stressVal.textContent=this.value">
     <button onclick="saveMental()">Salva check-in</button>
@@ -173,9 +179,9 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
 </section>
 
 <section class="page" id="life">
-  <h2 class="section-title">Queen Life</h2>
+  <h2 class="section-title">Vita Mary</h2>
 
-  <details class="module" open><summary>🏋️ Fitness Queen</summary><div class="module-body">
+  <details class="module" open><summary>🏋️ Fitness Mary</summary><div class="module-body">
     <div class="row"><input id="workoutName" placeholder="Allenamento"><input id="workoutMin" type="number" placeholder="Minuti"></div>
     <button style="margin-top:8px" onclick="addWorkout()">Registra</button><div id="workoutList" class="list"></div>
   </div></details>
@@ -235,6 +241,13 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
     <select id="coachGoal"><option>Organizzazione</option><option>Benessere</option><option>Fitness</option><option>Alimentazione</option><option>Lavoro</option></select>
     <textarea id="coachAsk" placeholder="Cosa vuoi organizzare oggi?"></textarea><button onclick="coach()">Chiedi al Coach</button>
     <div class="item" id="coachAnswer" style="margin-top:10px">Scrivi una richiesta e premi “Chiedi al Coach”.</div>
+  </div></details>
+  <details class="module" open><summary>🤝 Comunità Mary</summary><div class="module-body">
+    <div class="info-box"><strong>Uno spazio per essere ascoltate</strong><div class="note">Questa versione salva i tuoi messaggi solo sul tuo dispositivo. La community online con account, moderazione, segnalazioni e protezione utenti verrà collegata al server prima dell'apertura pubblica.</div></div>
+    <label>Pubblica come</label><select id="communityName"><option>Anonima</option><option>Mary Friend</option></select>
+    <label>Cosa vuoi condividere?</label><textarea id="communityText" placeholder="Sfogati, racconta la tua giornata o chiedi sostegno..."></textarea>
+    <button onclick="addCommunityPost()">💜 Condividi nel mio spazio</button>
+    <div id="communityList"></div>
   </div></details>
 </section>
 
@@ -296,7 +309,7 @@ const KEY='maryV5NavFix';
 const defaultState={
   water:0,sleep:7.5,steps:0,mood:'😊',dark:false,lang:'it',
   missions:[],events:[],meds:[],visits:[],workouts:[],recipes:[],shopping:[],homeTasks:[],money:[],diary:[],
-  profile:{name:''},cycle:{date:'',len:28,period:5,symptoms:''},meno:'',gyn:{name:'',phone:'',notes:''},nutrition:{name:'',phone:'',weight:'',goal:'',notes:''},
+  profile:{name:''},cycle:{date:'',len:28,period:5,symptoms:'',selected:[],intensity:'leggeri'},community:[],meno:'',gyn:{name:'',phone:'',notes:''},nutrition:{name:'',phone:'',weight:'',goal:'',notes:''},
   baby:{date:'',weight:'',height:'',notes:''},mental:{note:'',stress:5},relax:'',
   beauty:{am:'',pm:''},cv:{name:'',email:'',phone:'',profile:'',experience:'',skills:''},mamma:'',wishlist:[],sos:{contact:'',note:''},challenge:'',steps:{date:'',count:0,goal:8000,week:[]}
 };
@@ -330,7 +343,7 @@ function addMission(){let t=document.getElementById('missionText').value.trim();
 function toggleMission(id){let m=S.missions.find(x=>x.id==id);if(m)m.done=!m.done;save()}
 function del(arr,id){S[arr]=S[arr].filter(x=>x.id!=id);save()}
 
-function saveCycle(){S.cycle={date:cycleDate.value,len:Number(cycleLen.value||28),period:Number(periodLen.value||5),symptoms:cycleSymptoms.value};save()}
+function saveCycle(){S.cycle={...S.cycle,date:cycleDate.value,len:Number(cycleLen.value||28),period:Number(periodLen.value||5),symptoms:cycleSymptoms.value,intensity:symptomIntensity.value,selected:S.cycle.selected||[]};save()}
 
 
 function todayKey(){return new Date().toISOString().slice(0,10)}
@@ -391,16 +404,35 @@ function addWish(){if(!wishItem.value.trim())return;S.wishlist.unshift({id:uid()
 function saveSOS(){S.sos={contact:sosContact.value,note:sosNote.value};save()}
 function nextMotivation(){motivationIndex=(motivationIndex+1)%dailyQuotes.length;clubQuote.textContent=dailyQuotes[motivationIndex]}
 function saveChallenge(){S.challenge=weeklyChallenge.value;save()}
-function renderCycle(){
- if(!S.cycle.date){cycleToday.textContent="Inserisci la data dell'ultimo ciclo.";cycleForecast.textContent='';return}
- const start=new Date(S.cycle.date+'T12:00:00'), today=new Date(); today.setHours(12,0,0,0);
- const len=Math.max(20,Number(S.cycle.len||28)), period=Math.max(2,Number(S.cycle.period||5));
+const symptomOptions=['Crampi','Mal di testa','Gonfiore','Seno sensibile','Stanchezza','Acne','Voglie','Irritabilità','Umore basso','Perdite','Energia alta','Mal di schiena'];
+const phaseTips={
+'Mestruale':'Possibili crampi, stanchezza o bisogno di riposo. Movimento dolce e ritmi più tranquilli possono essere utili se ti fanno stare bene.',
+'Follicolare':'L’energia può gradualmente aumentare. Potresti sentirti più attiva e concentrata.',
+'Ovulatoria':'In questa fase alcune persone notano più energia o perdite cervicali. L’ovulazione indicata è solo una stima.',
+'Luteale':'Possono comparire gonfiore, irritabilità, voglie, seno sensibile o stanchezza. Cura sonno e regolarità dei pasti.'};
+function toggleSymptom(name){S.cycle.selected=S.cycle.selected||[];S.cycle.selected=S.cycle.selected.includes(name)?S.cycle.selected.filter(x=>x!==name):[...S.cycle.selected,name];save()}
+function renderSymptoms(){if(!window.symptomGrid)return;symptomGrid.innerHTML=symptomOptions.map(x=>`<button type="button" class="symptom-btn ${(S.cycle.selected||[]).includes(x)?'active':''}" onclick="toggleSymptom('${x}')">${x}</button>`).join('')}
+function cycleInfo(){
+ if(!S.cycle.date)return null;
+ const start=new Date(S.cycle.date+'T12:00:00'),today=new Date();today.setHours(12,0,0,0);
+ const len=Math.max(20,Number(S.cycle.len||28)),period=Math.max(2,Number(S.cycle.period||5));
  let day=Math.floor((today-start)/86400000)%len+1;if(day<1)day+=len;
  let phase=day<=period?'Mestruale':day<=Math.max(period+1,len-15)?'Follicolare':day<=len-12?'Ovulatoria':'Luteale';
  const next=new Date(start);while(next<=today)next.setDate(next.getDate()+len);
- const fertile=new Date(next);fertile.setDate(fertile.getDate()-14);
- cycleToday.textContent=`Giorno ${day} · fase ${phase}`;
- cycleForecast.textContent=`Prossimo ciclo stimato: ${fertile.toLocaleDateString('it-IT')} circa ovulazione · ${next.toLocaleDateString('it-IT')} prossimo ciclo.`;
+ const ovu=new Date(next);ovu.setDate(ovu.getDate()-14);
+ return {day,phase,next,ovu};
+}
+function renderMaryToday(){if(!window.maryToday)return;const c=cycleInfo();let parts=[];if(c)parts.push(`<strong>🌸 Giorno ${c.day} · fase ${c.phase}</strong><div class="note">${phaseTips[c.phase]}</div>`);parts.push(`<div class="mini-actions"><span class="pill">💧 Acqua ${S.water}/8</span><span class="pill">😴 ${S.sleep}h</span><span class="pill">${S.mood} Umore</span></div>`);if(S.events?.length){const n=S.events.filter(e=>e.date>=todayKey()).sort((a,b)=>a.date.localeCompare(b.date))[0];if(n)parts.push(`<div style="margin-top:8px"><b>📅 Prossimo:</b> ${esc(n.title)} · ${fmtDate(n.date)}</div>`)}maryToday.innerHTML=parts.join('')||'<p class="note">Inizia aggiungendo qualche dato alla tua giornata.</p>'}
+function addCommunityPost(){const t=communityText.value.trim();if(!t)return;S.community=S.community||[];S.community.unshift({id:uid(),name:communityName.value,text:t,date:new Date().toLocaleString('it-IT'),support:0});communityText.value='';save()}
+function supportCommunity(id){const x=(S.community||[]).find(p=>p.id==id);if(x)x.support=(x.support||0)+1;save()}
+function renderCommunity(){if(!window.communityList)return;communityList.innerHTML=(S.community||[]).map(p=>`<div class="community-post"><div class="meta">${esc(p.name)} · ${esc(p.date)}</div><div>${esc(p.text)}</div><div class="mini-actions"><button class="support-btn" onclick="supportCommunity(${p.id})">💜 Ti sono vicina ${p.support||''}</button><button class="support-btn" onclick="del('community',${p.id})">Elimina</button></div></div>`).join('')||'<p class="note" style="margin-top:10px">Il tuo spazio è ancora vuoto.</p>'}
+function renderCycle(){
+ renderSymptoms();
+ const c=cycleInfo();
+ if(!c){cycleToday.textContent="Inserisci la data dell'ultimo ciclo.";cycleForecast.textContent='';phaseAdvice.innerHTML='';return}
+ cycleToday.textContent=`Giorno ${c.day} · fase ${c.phase}`;
+ cycleForecast.textContent=`Ovulazione stimata: ${c.ovu.toLocaleDateString('it-IT')} · prossimo ciclo stimato: ${c.next.toLocaleDateString('it-IT')}.`;
+ const selected=(S.cycle.selected||[]);phaseAdvice.innerHTML=`<strong>Oggi potresti notare:</strong><div class="note">${phaseTips[c.phase]}</div>${selected.length?`<div style="margin-top:6px"><b>Hai segnato:</b> ${selected.join(', ')} · intensità ${S.cycle.intensity||'leggeri'}</div>`:''}`;
 }
 function saveGyn(){S.gyn={name:gynName.value,phone:gynPhone.value,notes:gynNotes.value};save()}
 function saveNutrition(){S.nutrition={name:nutName.value,phone:nutPhone.value,weight:weight.value,goal:weightGoal.value,notes:nutritionNotes.value};save()}
@@ -462,7 +494,7 @@ function render(){
   missions.innerHTML=S.missions.length?S.missions.map(m=>`<div class="mission item"><input type="checkbox" ${m.done?'checked':''} onchange="toggleMission(${m.id})"><span style="text-decoration:${m.done?'line-through':'none'}">${esc(m.t)}</span><button class="btn secondary auto" onclick="del('missions',${m.id})">×</button></div>`).join(''):'<p class="note">Nessuna missione ancora.</p>';
   const upcoming=S.events.filter(e=>e.date>=new Date().toISOString().slice(0,10)).slice(0,3);
   homeEvents.innerHTML=upcoming.length?upcoming.map(e=>`<div class="item"><strong>${esc(e.title)}</strong><small>${fmtDate(e.date)} ${esc(e.time)} · ${esc(e.cat)}</small></div>`).join(''):'<p class="note">Nessun appuntamento futuro.</p>';
-  setv('cycleDate',S.cycle.date);setv('cycleLen',S.cycle.len);setv('periodLen',S.cycle.period||5);setv('cycleSymptoms',S.cycle.symptoms||'');setv('menoNotes',S.meno||'');renderCycle();setv('gynName',S.gyn.name);setv('gynPhone',S.gyn.phone);setv('gynNotes',S.gyn.notes);
+  setv('cycleDate',S.cycle.date);setv('cycleLen',S.cycle.len);setv('periodLen',S.cycle.period||5);setv('cycleSymptoms',S.cycle.symptoms||'');setv('symptomIntensity',S.cycle.intensity||'leggeri');setv('menoNotes',S.meno||'');renderCycle();setv('gynName',S.gyn.name);setv('gynPhone',S.gyn.phone);setv('gynNotes',S.gyn.notes);
   setv('nutName',S.nutrition.name);setv('nutPhone',S.nutrition.phone);setv('weight',S.nutrition.weight);setv('weightGoal',S.nutrition.goal);setv('nutritionNotes',S.nutrition.notes);
   medList.innerHTML=S.meds.map(x=>`<div class="item"><strong>${esc(x.name)}</strong><small>${esc(x.dose)}</small><button class="btn secondary" onclick="del('meds',${x.id})">Rimuovi</button></div>`).join('');
   visitList.innerHTML=S.visits.map(x=>`<div class="item"><strong>${esc(x.name)}</strong><small>${fmtDate(x.date)}</small><button class="btn secondary" onclick="del('visits',${x.id})">Rimuovi</button></div>`).join('');
@@ -478,7 +510,7 @@ function render(){
   setv('cvName',S.cv.name);setv('cvEmail',S.cv.email);setv('cvPhone',S.cv.phone);setv('cvProfile',S.cv.profile);setv('cvExperience',S.cv.experience);setv('cvSkills',S.cv.skills);
   eventList.innerHTML=S.events.length?S.events.map(e=>`<div class="item"><span class="pill">${esc(e.cat)}</span><strong>${esc(e.title)}</strong><small>${fmtDate(e.date)} ${esc(e.time)}</small><button class="btn secondary" onclick="del('events',${e.id})">Rimuovi</button></div>`).join(''):'<p class="note">Nessun appuntamento.</p>';
   diaryList.innerHTML=S.diary.slice(0,20).map(x=>`<div class="item"><strong>${esc(x.date)}</strong><div>${esc(x.text)}</div><button class="btn secondary" onclick="del('diary',${x.id})">Rimuovi</button></div>`).join('');
-  renderSteps();setv('mammaNotes',S.mamma||'');setv('sosContact',S.sos?.contact||'');setv('sosNote',S.sos?.note||'');setv('weeklyChallenge',S.challenge||'');
+  renderSteps();renderMaryToday();renderCommunity();setv('mammaNotes',S.mamma||'');setv('sosContact',S.sos?.contact||'');setv('sosNote',S.sos?.note||'');setv('weeklyChallenge',S.challenge||'');
   wishList.innerHTML=(S.wishlist||[]).map(x=>`<div class="item"><strong>${esc(x.t)}</strong><button class="btn secondary" onclick="del('wishlist',${x.id})">Rimuovi</button></div>`).join('');
   dailyQuote.textContent=quoteForToday();clubQuote.textContent=dailyQuotes[motivationIndex];filterBuiltRecipes('Tutte');
   setv('profileName',S.profile.name);setv('lang',S.lang);
