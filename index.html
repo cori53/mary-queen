@@ -11,17 +11,17 @@
 <title>Mary</title>
 <style>
 :root{
-  --bg:#fbf7ff;--card:#fff;--text:#2a1836;--muted:#786985;--primary:#7627a8;--primary2:#b449c9;
-  --gold:#d6a23f;--line:#eadff0;--ok:#2a9d6f;--danger:#c84b67;--shadow:0 10px 30px rgba(80,35,105,.12);
+  --bg:#fff7fc;--card:#fff;--text:#35122f;--muted:#80667d;--primary:#86158f;--primary2:#d13eb5;
+  --gold:#e1ad42;--line:#f0d9eb;--ok:#2a9d6f;--danger:#c84b67;--shadow:0 10px 30px rgba(80,35,105,.12);
 }
 body.dark{--bg:#140d19;--card:#211628;--text:#f8efff;--muted:#c2b2c9;--line:#3b2944;--shadow:0 12px 30px rgba(0,0,0,.25)}
 *{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 body{min-height:100vh}.app{max-width:430px;margin:auto;min-height:100vh;padding-bottom:90px}
-header{position:sticky;top:0;z-index:8;background:linear-gradient(135deg,#6f25a6,#9b37ba);color:#fff;padding:14px 16px 18px;border-radius:0 0 26px 26px;box-shadow:var(--shadow)}
+header{position:sticky;top:0;z-index:8;background:linear-gradient(135deg,#4b073f 0%,#86158f 48%,#c735ad 100%);color:#fff;padding:14px 16px 18px;border-radius:0 0 26px 26px;box-shadow:var(--shadow)}
 .brand{display:flex;align-items:center;gap:12px}.brand img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.75);box-shadow:0 6px 18px rgba(0,0,0,.22)}
 .brand h1{font-size:24px;margin:0}.brand p{margin:3px 0 0;font-size:12px;opacity:.9}
 .toprow{display:flex;justify-content:space-between;align-items:center}.iconbtn{border:0;background:rgba(255,255,255,.16);color:#fff;width:38px;height:38px;border-radius:12px;font-size:18px}
-.page{display:none;padding:16px}.page.active{display:block}.hero{background:linear-gradient(135deg,rgba(118,39,168,.13),rgba(214,162,63,.14));border:1px solid var(--line);padding:16px;border-radius:22px;margin-bottom:14px}
+.page{display:none;padding:16px}.page.active{display:block}.hero{background:linear-gradient(135deg,rgba(134,21,143,.14),rgba(225,173,66,.18));border:1px solid var(--line);padding:16px;border-radius:22px;margin-bottom:14px}
 .hero h2{margin:0 0 5px}.hero p{margin:0;color:var(--muted);font-size:13px}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px;box-shadow:var(--shadow)}
 .card h3{margin:0 0 8px;font-size:15px}.card p{margin:0;color:var(--muted);font-size:12px}.wide{grid-column:1/-1}
@@ -51,7 +51,7 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
 .recipe-card{border:1px solid var(--line);border-radius:15px;padding:12px;background:var(--bg)}
 .recipe-card h4{margin:0 0 5px}.recipe-card small{color:var(--muted)}
 .chips{display:flex;gap:6px;overflow:auto;padding:4px 0 10px}.chip{white-space:nowrap;background:var(--bg);color:var(--primary);border:1px solid var(--line);padding:7px 10px}
-.info-box{background:linear-gradient(135deg,rgba(118,39,168,.09),rgba(214,162,63,.10));border:1px solid var(--line);padding:12px;border-radius:15px;margin:9px 0}
+.info-box{background:linear-gradient(135deg,rgba(134,21,143,.10),rgba(225,173,66,.13));border:1px solid var(--line);padding:12px;border-radius:15px;margin:9px 0}
 
 .steps-compact{padding:14px!important}
 .steps-compact .kpi{font-size:25px}
@@ -60,6 +60,11 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
 .steps-compact p.note{font-size:11px;line-height:1.3;margin-top:7px}
 
 .symptom-grid{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}.symptom-btn{background:var(--bg);color:var(--text);border:1px solid var(--line);padding:8px 10px;font-size:12px}.symptom-btn.active{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;border-color:transparent}.today-box{border-left:4px solid var(--gold)}.community-post{border:1px solid var(--line);border-radius:15px;padding:11px;background:var(--bg);margin-top:8px}.community-post .meta{font-size:11px;color:var(--muted);margin-bottom:5px}.support-btn{background:var(--card);color:var(--primary);border:1px solid var(--line);font-size:11px;padding:7px 9px}.mini-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+
+.life-photo{position:relative;overflow:hidden;border-radius:22px;min-height:190px;margin-bottom:14px;border:1px solid rgba(225,173,66,.45);box-shadow:0 14px 34px rgba(75,7,63,.18);background-size:cover;background-position:center}
+.life-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(55,5,48,.82),rgba(90,8,77,.28) 58%,rgba(0,0,0,.03))}
+.life-photo .copy{position:relative;z-index:2;color:#fff;padding:22px 18px;max-width:62%}.life-photo h2{margin:0 0 7px;font-family:Georgia,serif;font-size:25px}.life-photo p{margin:0;font-size:13px;line-height:1.45}.life-photo .gold{color:#f6d77b;font-style:italic}
+.life-photo.homepic{background-image:url('mary-woman.jpg')}.life-photo.pregpic{background-image:url('mary-pregnancy.jpg');background-position:center 24%}.life-photo.mammapic{background-image:url('mary-mamma-bebe.jpg');background-position:center 25%}
 </style>
 </head>
 <body>
@@ -76,7 +81,10 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
 
 <main>
 <section class="page active" id="home">
+  <div class="life-photo homepic"><div class="copy"><h2>Il tuo mondo, <span class="gold">con Mary</span></h2><p>Salute, benessere, famiglia, lavoro e quotidianità sempre con te.</p></div></div>
   <div class="hero"><h2 id="hello">Buongiorno 💜</h2><p>Una sola app per salute, benessere, famiglia, lavoro e quotidianità.</p></div>
+
+  <div class="card wide" style="margin-bottom:12px;border:1px solid rgba(225,173,66,.55)"><h3>🌸 Check-in quotidiano · 30 secondi</h3><p class="note">Come stai oggi? Mary crea un piccolo Piano Benessere per la giornata.</p><div class="row"><div><label>Energia</label><select id="dailyEnergy"><option>Bassa</option><option selected>Media</option><option>Alta</option></select></div><div><label>Stress</label><select id="dailyStress"><option>Basso</option><option selected>Medio</option><option>Alto</option></select></div></div><div class="row"><div><label>Umore</label><select id="dailyMood"><option>😊 Serena</option><option>😌 Tranquilla</option><option>😐 Così così</option><option>😔 Giù</option></select></div><div><label>Sonno</label><select id="dailySleep"><option>Scarso</option><option selected>Discreto</option><option>Buono</option></select></div></div><button style="width:100%;margin-top:10px" onclick="makeDailyPlan()">✨ Crea il Piano Benessere di Oggi</button><div id="dailyPlan" class="info-box" style="display:none;margin-top:10px"></div></div>
   <div class="card wide today-box" style="margin-bottom:12px"><h3>💜 Mary Oggi</h3><div id="maryToday"><p class="note">Aggiungi la data del ciclo per ricevere un riepilogo personalizzato.</p></div></div>
   <div class="card wide" style="margin-bottom:12px"><h3>👑 Frase del giorno</h3><div class="quote" id="dailyQuote">Ogni piccolo passo costruisce la tua forza.</div><p class="note" style="text-align:center">Un piccolo pensiero per iniziare la giornata.</p></div>
 <div class="card wide steps-compact" style="margin-bottom:12px">
@@ -109,6 +117,7 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
 </section>
 
 <section class="page" id="health">
+  <div class="life-photo pregpic"><div class="copy"><h2>Prenditi <span class="gold">cura di te</span></h2><p>Uno spazio dedicato alla salute femminile, al ciclo e al tuo benessere.</p></div></div>
   <h2 class="section-title">Salute Donna</h2>
 
   <details class="module" open><summary>🌸 Ciclo completo & Ginecologo</summary><div class="module-body">
@@ -117,8 +126,9 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
     <label>Sintomi oggi — tocca, senza scrivere</label>
     <div class="symptom-grid" id="symptomGrid"></div>
     <label>Nota facoltativa</label><input id="cycleSymptoms" placeholder="Scrivi solo se vuoi aggiungere qualcosa">
-    <button style="margin-top:10px;width:100%" onclick="saveCycle()">Salva ciclo</button>
+    <div class="row" style="margin-top:10px"><button style="width:100%" onclick="saveCycle()">Salva ciclo</button><button style="width:100%" onclick="saveCycleDay()">Salva sintomi di oggi</button></div>
     <div class="info-box"><strong id="cycleToday">Inserisci la data dell'ultimo ciclo.</strong><div id="cycleForecast" class="note" style="margin-top:5px"></div><div id="phaseAdvice" style="margin-top:8px"></div></div>
+    <div id="cycleHistory" class="list"></div>
     <h3>Le 4 fasi</h3>
     <div class="phase-grid">
       <div class="phase"><b>🩸 Mestruale</b>Riposo, ascolto del corpo e movimento dolce se ti fa stare bene.</div>
@@ -180,6 +190,11 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
 
 <section class="page" id="life">
   <h2 class="section-title">Vita Mary</h2>
+  <details class="module" open><summary>📈 Progressi & Streak</summary><div class="module-body"><div class="row"><div class="card"><h3>🔥 Streak</h3><div class="metric" id="streakVal">0</div><p>giorni di check-in</p></div><div class="card"><h3>🌸 Check-in</h3><div class="metric" id="checkinCount">0</div><p>registrati</p></div></div><div id="progressWeek" class="list"></div></div></details>
+  <details class="module"><summary>🧘 Respiro & Relax</summary><div class="module-body"><p>Una pausa breve per rallentare e ritrovare calma.</p><div class="quote" id="breathText">Inspira lentamente per 4 secondi.</div><button style="width:100%" onclick="startBreathing()">Avvia 1 minuto di respirazione</button><p class="note">Esercizio generale di benessere, non sostituisce assistenza medica.</p></div></details>
+  <details class="module"><summary>🥗 Pasti & Idratazione</summary><div class="module-body"><label>Pasto / nota</label><input id="mealText" placeholder="Es. pranzo: riso, verdure e legumi"><button style="margin-top:8px" onclick="addMeal()">Aggiungi pasto</button><div id="mealList" class="list"></div><p class="note">Il contatore dell'acqua è nella Home. I suggerimenti sono generali e non costituiscono una dieta medica.</p></div></details>
+  <details class="module"><summary>👑 Mary Premium</summary><div class="module-body"><div class="info-box"><strong>Premium</strong><div class="note">Spazio predisposto per programmi personalizzati, contenuti avanzati e funzioni aggiuntive. L'abbonamento reale richiede il collegamento a Google Play Billing prima della pubblicazione.</div></div></div></details>
+
 
   <details class="module" open><summary>🏋️ Fitness Mary</summary><div class="module-body">
     <div class="row"><input id="workoutName" placeholder="Allenamento"><input id="workoutMin" type="number" placeholder="Minuti"></div>
@@ -213,6 +228,7 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
   </div></details>
 
   <details class="module"><summary>👶 Mary Mamma & Babysitter</summary><div class="module-body">
+    <div class="life-photo mammapic" style="min-height:220px"><div class="copy"><h2>Maternità <span class="gold">e famiglia</span></h2><p>Un angolo Mary dedicato a mamma, bebè e vita di famiglia.</p></div></div>
     <label>Routine / cose da ricordare</label><textarea id="mammaNotes" placeholder="Pediatra, scuola, attività, babysitter, note famiglia..."></textarea>
     <button onclick="saveMamma()">Salva</button>
   </div></details>
@@ -252,7 +268,7 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
 </section>
 
 <section class="page" id="agenda">
-  <h2 class="section-title">Calendario Queen</h2>
+  <h2 class="section-title">Calendario Mary</h2>
   <div class="card">
     <div class="row"><input id="eventTitle" placeholder="Titolo"><select id="eventCat"><option>Personale</option><option>Salute</option><option>Famiglia</option><option>Lavoro</option></select></div>
     <div class="row" style="margin-top:8px"><input id="eventDate" type="date"><input id="eventTime" type="time"></div>
@@ -261,12 +277,12 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}.note{font-size:11px;
   <div id="eventList" class="list"></div>
 
   <details class="module" style="margin-top:14px"><summary>🔔 Notifiche Smart</summary><div class="module-body">
-    <p class="note">Attiva le notifiche del browser. Su alcuni telefoni i promemoria funzionano meglio quando l'app viene aperta regolarmente.</p>
+    <p class="note">Attiva le notifiche di Mary. Gli appuntamenti con un orario possono creare un promemoria sul telefono.</p>
     <button onclick="askNotifications()">Attiva notifiche</button>
     <div id="notifyStatus" class="item" style="margin-top:10px">Stato: non verificato</div>
   </div></details>
 
-  <details class="module"><summary>📔 Diario Queen PRO</summary><div class="module-body">
+  <details class="module"><summary>📔 Diario Mary PRO</summary><div class="module-body">
     <textarea id="diaryText" placeholder="Come è andata oggi?"></textarea><button onclick="saveDiary()">Salva pagina</button><div id="diaryList" class="list"></div>
   </div></details>
 </section>
@@ -309,9 +325,9 @@ const KEY='maryV5NavFix';
 const defaultState={
   water:0,sleep:7.5,steps:0,mood:'😊',dark:false,lang:'it',
   missions:[],events:[],meds:[],visits:[],workouts:[],recipes:[],shopping:[],homeTasks:[],money:[],diary:[],
-  profile:{name:''},cycle:{date:'',len:28,period:5,symptoms:'',selected:[],intensity:'leggeri'},community:[],meno:'',gyn:{name:'',phone:'',notes:''},nutrition:{name:'',phone:'',weight:'',goal:'',notes:''},
+  profile:{name:''},cycle:{date:'',len:28,period:5,symptoms:'',selected:[],intensity:'leggeri'},cycleHistory:[],community:[],meno:'',gyn:{name:'',phone:'',notes:''},nutrition:{name:'',phone:'',weight:'',goal:'',notes:''},
   baby:{date:'',weight:'',height:'',notes:''},mental:{note:'',stress:5},relax:'',
-  beauty:{am:'',pm:''},cv:{name:'',email:'',phone:'',profile:'',experience:'',skills:''},mamma:'',wishlist:[],sos:{contact:'',note:''},challenge:'',steps:{date:'',count:0,goal:8000,week:[]}
+  beauty:{am:'',pm:''},cv:{name:'',email:'',phone:'',profile:'',experience:'',skills:''},mamma:'',wishlist:[],sos:{contact:'',note:''},challenge:'',steps:{date:'',count:0,goal:8000,week:[]},checkins:[],meals:[]
 };
 let S=load();
 
@@ -420,18 +436,45 @@ function cycleInfo(){
  let phase=day<=period?'Mestruale':day<=Math.max(period+1,len-15)?'Follicolare':day<=len-12?'Ovulatoria':'Luteale';
  const next=new Date(start);while(next<=today)next.setDate(next.getDate()+len);
  const ovu=new Date(next);ovu.setDate(ovu.getDate()-14);
- return {day,phase,next,ovu};
+ const daysUntil=Math.max(0,Math.ceil((next-today)/86400000)); return {day,phase,next,ovu,daysUntil};
 }
 function renderMaryToday(){if(!window.maryToday)return;const c=cycleInfo();let parts=[];if(c)parts.push(`<strong>🌸 Giorno ${c.day} · fase ${c.phase}</strong><div class="note">${phaseTips[c.phase]}</div>`);parts.push(`<div class="mini-actions"><span class="pill">💧 Acqua ${S.water}/8</span><span class="pill">😴 ${S.sleep}h</span><span class="pill">${S.mood} Umore</span></div>`);if(S.events?.length){const n=S.events.filter(e=>e.date>=todayKey()).sort((a,b)=>a.date.localeCompare(b.date))[0];if(n)parts.push(`<div style="margin-top:8px"><b>📅 Prossimo:</b> ${esc(n.title)} · ${fmtDate(n.date)}</div>`)}maryToday.innerHTML=parts.join('')||'<p class="note">Inizia aggiungendo qualche dato alla tua giornata.</p>'}
+
+function makeDailyPlan(){
+ const c={date:todayKey(),energy:dailyEnergy.value,stress:dailyStress.value,mood:dailyMood.value,sleep:dailySleep.value};
+ S.checkins=S.checkins||[];S.checkins=S.checkins.filter(x=>x.date!==c.date);S.checkins.unshift(c);S.checkins=S.checkins.slice(0,60);
+ const move=c.energy==='Bassa'?'5–10 minuti di stretching o passeggiata dolce':'10–20 minuti di movimento che ti piace';
+ const calm=c.stress==='Alto'?'1 minuto di respirazione lenta + una pausa senza schermo':'una breve pausa di respirazione consapevole';
+ const rest=c.sleep==='Scarso'?'stasera prova una routine più tranquilla e regolare':'mantieni una routine serale regolare';
+ S.dailyPlan={date:c.date,text:`💧 Acqua: completa il tuo obiettivo · 🚶 ${move} · 🧘 ${calm} · 🌙 ${rest} · 💜 scegli una piccola cosa solo per te.`};save();
+}
+let breathTimer=null;function startBreathing(){let n=60,phase=0;clearInterval(breathTimer);const msgs=['Inspira lentamente…','Trattieni dolcemente…','Espira lentamente…','Rilassa le spalle…'];breathText.textContent=msgs[0]+' 60s';breathTimer=setInterval(()=>{n--;phase=(phase+1)%msgs.length;breathText.textContent=msgs[phase]+' '+n+'s';if(n<=0){clearInterval(breathTimer);breathText.textContent='Fatto 💜 Prenditi un momento e nota come ti senti.'}},1000)}
+function addMeal(){const t=mealText.value.trim();if(!t)return;S.meals=S.meals||[];S.meals.unshift({id:uid(),date:todayKey(),t});mealText.value='';save()}
+function renderWellness(){
+ if(window.dailyPlan){if(S.dailyPlan&&S.dailyPlan.date===todayKey()){dailyPlan.style.display='block';dailyPlan.innerHTML='<strong>✨ Piano Benessere di Oggi</strong><div style="margin-top:6px">'+esc(S.dailyPlan.text)+'</div>'}else dailyPlan.style.display='none'}
+ const ci=S.checkins||[];if(window.checkinCount)checkinCount.textContent=ci.length;let streak=0,d=new Date();for(let i=0;i<60;i++){const k=d.toISOString().slice(0,10);if(ci.some(x=>x.date===k))streak++;else if(i>0)break;d.setDate(d.getDate()-1)}if(window.streakVal)streakVal.textContent=streak;
+ if(window.progressWeek)progressWeek.innerHTML=ci.slice(0,7).map(x=>`<div class="item"><strong>${fmtDate(x.date)} · ${esc(x.mood)}</strong><small>Energia ${esc(x.energy)} · stress ${esc(x.stress)} · sonno ${esc(x.sleep)}</small></div>`).join('')||'<p class="note">Fai il primo check-in dalla Home.</p>';
+ if(window.mealList)mealList.innerHTML=(S.meals||[]).slice(0,12).map(x=>`<div class="item"><strong>${esc(x.t)}</strong><small>${fmtDate(x.date)}</small><button class="btn secondary" onclick="del('meals',${x.id})">Rimuovi</button></div>`).join('')||'<p class="note">Nessun pasto registrato.</p>';
+}
 function addCommunityPost(){const t=communityText.value.trim();if(!t)return;S.community=S.community||[];S.community.unshift({id:uid(),name:communityName.value,text:t,date:new Date().toLocaleString('it-IT'),support:0});communityText.value='';save()}
 function supportCommunity(id){const x=(S.community||[]).find(p=>p.id==id);if(x)x.support=(x.support||0)+1;save()}
 function renderCommunity(){if(!window.communityList)return;communityList.innerHTML=(S.community||[]).map(p=>`<div class="community-post"><div class="meta">${esc(p.name)} · ${esc(p.date)}</div><div>${esc(p.text)}</div><div class="mini-actions"><button class="support-btn" onclick="supportCommunity(${p.id})">💜 Ti sono vicina ${p.support||''}</button><button class="support-btn" onclick="del('community',${p.id})">Elimina</button></div></div>`).join('')||'<p class="note" style="margin-top:10px">Il tuo spazio è ancora vuoto.</p>'}
+function saveCycleDay(){
+ const c=cycleInfo(); if(!c){toast('Inserisci prima la data dell\'ultimo ciclo');return}
+ S.cycleHistory=S.cycleHistory||[]; const key=todayKey();
+ const item={id:uid(),date:key,day:c.day,phase:c.phase,symptoms:[...(S.cycle.selected||[])],intensity:S.cycle.intensity||'leggeri',note:cycleSymptoms.value.trim()};
+ S.cycleHistory=S.cycleHistory.filter(x=>x.date!==key); S.cycleHistory.unshift(item); S.cycleHistory=S.cycleHistory.slice(0,30); save();
+}
+function renderCycleHistory(){
+ if(!window.cycleHistory)return; const h=(S.cycleHistory||[]).slice(0,5);
+ cycleHistory.innerHTML=h.length?`<h3>Ultimi giorni registrati</h3>`+h.map(x=>`<div class="item"><div><b>${fmtDate(x.date)} · ${esc(x.phase)}</b><small>${(x.symptoms||[]).length?esc(x.symptoms.join(', ')):'Nessun sintomo selezionato'} · ${esc(x.intensity||'')}</small></div><button class="danger" onclick="del('cycleHistory',${x.id})">×</button></div>`).join(''):'';
+}
 function renderCycle(){
- renderSymptoms();
+ renderSymptoms(); renderCycleHistory();
  const c=cycleInfo();
  if(!c){cycleToday.textContent="Inserisci la data dell'ultimo ciclo.";cycleForecast.textContent='';phaseAdvice.innerHTML='';return}
  cycleToday.textContent=`Giorno ${c.day} · fase ${c.phase}`;
- cycleForecast.textContent=`Ovulazione stimata: ${c.ovu.toLocaleDateString('it-IT')} · prossimo ciclo stimato: ${c.next.toLocaleDateString('it-IT')}.`;
+ cycleForecast.textContent=`Ovulazione stimata: ${c.ovu.toLocaleDateString('it-IT')} · prossimo ciclo: ${c.next.toLocaleDateString('it-IT')} · tra circa ${c.daysUntil} giorni.`;
  const selected=(S.cycle.selected||[]);phaseAdvice.innerHTML=`<strong>Oggi potresti notare:</strong><div class="note">${phaseTips[c.phase]}</div>${selected.length?`<div style="margin-top:6px"><b>Hai segnato:</b> ${selected.join(', ')} · intensità ${S.cycle.intensity||'leggeri'}</div>`:''}`;
 }
 function saveGyn(){S.gyn={name:gynName.value,phone:gynPhone.value,notes:gynNotes.value};save()}
@@ -462,12 +505,14 @@ function coach(){
   };
   coachAnswer.innerHTML=`<strong>${esc(g)}</strong><br>${esc(suggestions[g])}${q?'<br><br><small>Richiesta: '+esc(q)+'</small>':''}`;
 }
-function addEvent(){if(!eventTitle.value.trim()||!eventDate.value)return;S.events.push({id:uid(),title:eventTitle.value,cat:eventCat.value,date:eventDate.value,time:eventTime.value});S.events.sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));eventTitle.value='';eventDate.value='';eventTime.value='';save()}
+function addEvent(){if(!eventTitle.value.trim()||!eventDate.value)return;const t=eventTitle.value.trim(),d=eventDate.value,tm=eventTime.value;S.events.push({id:uid(),title:t,cat:eventCat.value,date:d,time:tm});S.events.sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));if(tm&&window.MaryAndroid&&MaryAndroid.scheduleEventReminder)MaryAndroid.scheduleEventReminder(t,d,tm);eventTitle.value='';eventDate.value='';eventTime.value='';save()}
 async function askNotifications(){
+  if(window.MaryAndroid&&MaryAndroid.requestNotificationPermission){notifyStatus.textContent='Richiesta autorizzazione…';MaryAndroid.requestNotificationPermission();return}
   if(!('Notification'in window)){notifyStatus.textContent='Notifiche non supportate su questo dispositivo.';return}
   const p=await Notification.requestPermission();notifyStatus.textContent='Stato: '+p;
-  if(p==='granted')new Notification('Mary',{body:'Notifiche attivate 👑',icon:'icon-192.png'});
+  if(p==='granted')new Notification('Mary',{body:'Notifiche attivate 💜',icon:'icon-192.png'});
 }
+window.nativeNotificationResult=function(status){notifyStatus.textContent=status==='granted'?'Stato: attive ✅':'Stato: non autorizzate';};
 function saveDiary(){if(!diaryText.value.trim())return;S.diary.unshift({id:uid(),date:new Date().toLocaleString(),text:diaryText.value});diaryText.value='';save()}
 function saveProfile(){S.profile.name=profileName.value;S.lang=lang.value;save()}
 function setLang(v){S.lang=v;save();applyLang()}
@@ -515,15 +560,15 @@ function render(){
   dailyQuote.textContent=quoteForToday();clubQuote.textContent=dailyQuotes[motivationIndex];filterBuiltRecipes('Tutte');
   setv('profileName',S.profile.name);setv('lang',S.lang);
   statWorkout.textContent=S.workouts.length;statRecipes.textContent=S.recipes.length;statEvents.textContent=S.events.length;statMissions.textContent=S.missions.filter(x=>x.done).length;
+  renderWellness();
   applyLang();
 }
 render();
 
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}))}
-</script>
-<script>
 if('serviceWorker' in navigator){
- navigator.serviceWorker.register('./service-worker.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('./service-worker.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
+  });
 }
 </script></body>
 </html>
